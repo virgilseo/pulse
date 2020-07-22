@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/randomizer",
     name: "Randomizer",
-    component: () => import("../views/About.vue")
+    component: () => import("../views/Randomizer.vue")
   }
 ];
 
