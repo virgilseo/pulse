@@ -4,6 +4,9 @@
     <section v-if="loading">
       <p>Loading...</p>
     </section>
+    <section v-else-if="error">
+      <p>Something went wrong. Please try again later</p>
+    </section>
     <ul v-if="events.data">
       <li v-for="eventItem in events.data._embedded.events" :key="eventItem.id">
         <h3>{{eventItem.name}}</h3>
@@ -19,7 +22,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import axios from "axios"
+import axios from "axios";
 
 @Component
 export default class Home extends Vue {
@@ -27,6 +30,7 @@ export default class Home extends Vue {
   //Set the intial data state
   private events: object = {}
   private loading: boolean = null
+  private error: boolean = null
 
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
@@ -40,6 +44,7 @@ export default class Home extends Vue {
        }
      )
      .catch(error => {
+       this.error = true
        console.log(error)
        }
      )
