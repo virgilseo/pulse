@@ -7,8 +7,8 @@
     <section v-else-if="error">
       <p>Something went wrong. Please try again later</p>
     </section>
-    <ul v-if="events.data">
-      <li v-for="eventItem in events.data._embedded.events" :key="eventItem.id">
+    <ul v-else>
+      <li v-for="eventItem in events" :key="eventItem.id">
         <h3>{{eventItem.name}}</h3>
         <img :src="eventItem.images[0].url" :alt="eventItem.name">
         <p>What: {{eventItem.classifications[0].segment.name}}</p>
@@ -28,9 +28,9 @@ import axios from "axios";
 export default class Home extends Vue {
 
   //Set the intial data state
-  private events: object = {}
-  private loading: boolean = null
-  private error: boolean = null
+  private events: Array<object> = []
+  private loading = false
+  private error = false
 
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
@@ -39,8 +39,8 @@ export default class Home extends Vue {
     this.loading = true
 
     axios.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10')
-     .then((response: object)  => {
-       this.events = response
+     .then(response  => {
+       this.events = response.data._embedded.events
        }
      )
      .catch(error => {
