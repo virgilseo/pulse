@@ -10,10 +10,10 @@
     <ul v-else>
       <li v-for="eventItem in events" :key="eventItem.id">
         <h3>{{eventItem.name}}</h3>
-        <img :src="eventItem.images[0].url" :alt="eventItem.name">
-        <p>What: {{eventItem.classifications[0].segment.name}}</p>
-        <p>When: {{eventItem.dates.start.localTime}} - {{eventItem.dates.start.localDate}} </p>
-        <p>Where: {{eventItem._embedded.venues[0].address.line1}}, {{eventItem._embedded.venues[0].city.name}}</p>
+        <img v-if="eventItem.images" img :src="eventItem.images[0].url" :alt="eventItem.name">
+        <p v-if="eventItem.classifications">What: {{eventItem.classifications[0].segment.name}}</p>
+        <p v-if="eventItem.dates.start">When: {{eventItem.dates.start.localTime}} - {{eventItem.dates.start.localDate}} </p>
+        <p v-if="eventItem._embedded.venues[0].address">Where: {{eventItem._embedded.venues[0].address.line1}}, {{eventItem._embedded.venues[0].city.name}}</p>
         <button type="button" name="details">More details</button>
       </li>
     </ul>
