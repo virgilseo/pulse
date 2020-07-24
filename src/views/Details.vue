@@ -23,6 +23,9 @@
       <section v-if="loading">
         <p>Loading...</p>
       </section>
+      <section v-if="error">
+        <p>Something went wrong. Please try again later</p>
+      </section>
       <ul>
         <li v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
           <h1>{{relatedEvent.name}}</h1>
