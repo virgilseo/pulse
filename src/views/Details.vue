@@ -20,6 +20,9 @@
     <p><a v-if="event.seatmap" :href="event.seatmap.staticUrl">Check out the seat map</a><p/>
     <section class="related-events">
       <h3>You might also like: </h3>
+      <section v-if="loading">
+        <p>Loading...</p>
+      </section>
       <ul>
         <li v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
           <h1>{{relatedEvent.name}}</h1>
@@ -60,12 +63,18 @@ export default class Home extends Vue {
   private error = false
   //Get 3 related events form the api after the component mounts
   mounted() {
+    //Display loader while fetching the events data from the api
+    this.loading = true
     axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=3&keyword=${this.event.classifications[0].segment.name}`)
       .then(response => {
         this.relatedEvents = response.data._embedded.events
       })
       .catch(error => {
+        this.error = true
         console.log(error)
+      })
+      .finally(() => {
+        this.loading = false
       })
   }
 }
