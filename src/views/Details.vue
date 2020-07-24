@@ -18,10 +18,27 @@
     </p>
     <p><a v-if="event.url" :href="event.url">Get tickets</a></p>
     <p><a v-if="event.seatmap" :href="event.seatmap.staticUrl">Check out the seat map</a><p/>
-    <section>
+    <section class="related-events">
       <h3>You might also like: </h3>
       <ul>
-        <li>
+        <li v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
+          <h1>{{relatedEvent.name}}</h1>
+          <img v-if="relatedEvent.images" :src="relatedEvent.images[0].url" :alt="relatedEvent.name">
+          <p v-if="relatedEvent.dates">When: {{relatedEvent.dates.start.localTime}} -
+             {{relatedEvent.dates.start.localDate}}
+          </p>
+          <section v-if="relatedEvent._embedded">
+            Where:
+            <span v-if="relatedEvent._embedded.venues[0]">{{relatedEvent._embedded.venues[0].name}}</span>
+            <span v-if="relatedEvent._embedded.venues[0].address">{{relatedEvent._embedded.venues[0].address.line1}} </span>
+            <span v-if="relatedEvent._embedded.venues[0].city.name">{{relatedEvent._embedded.venues[0].city.name}}</span>
+          </section>
+          <p v-if="relatedEvent.priceRanges">
+            Prices from {{relatedEvent.priceRanges[0].min}} to
+            {{relatedEvent.priceRanges[0].max}} {{relatedEvent.priceRanges[0].currency}}
+          </p>
+          <p><a v-if="relatedEvent.url" :href="relatedEvent.url">Get tickets</a></p>
+          <p><a v-if="relatedEvent.seatmap" :href="relatedEvent.seatmap.staticUrl">Check out the seat map</a><p/>
         </li>
       </ul>
     </section>
@@ -30,17 +47,22 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import axios from 'axios'
+import axios from 'axios';
 
 @Component
 export default class Home extends Vue {
-  @Prop() private eventId!: string;
-  private event: object = {}
-
+  //Set props
+  @Prop() private eventId!: string
+  @Prop() private event!: object
+  //Set the innitial state
+  private relatedEvents: Array<object> = []
+  private loading = false
+  private error = false
+  //Get 3 related events form the api after the component mounts
   mounted() {
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events/${this.eventId}.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&ev`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=3&keyword=${this.event.classifications[0].segment.name}`)
       .then(response => {
-        this.event = response.data
+        this.relatedEvents = response.data._embedded.events
       })
       .catch(error => {
         console.log(error)
