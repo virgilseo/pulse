@@ -14,7 +14,7 @@
         <p v-if="eventItem.classifications">What: {{eventItem.classifications[0].segment.name}}</p>
         <p v-if="eventItem.dates.start">When: {{eventItem.dates.start.localTime}} - {{eventItem.dates.start.localDate}} </p>
         <p v-if="eventItem._embedded.venues[0].address">Where: {{eventItem._embedded.venues[0].address.line1}}, {{eventItem._embedded.venues[0].city.name}}</p>
-        <button type="button" name="details">More details</button>
+        <router-link :to="{name: 'details', params: {eventId: eventItem.id, eventItem: eventItem }}">More details</router-link>
       </li>
     </ul>
   </div>
