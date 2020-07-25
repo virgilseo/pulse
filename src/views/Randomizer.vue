@@ -1,5 +1,44 @@
 <template>
   <div class="randomizer">
-    <h1>Randomizer</h1>
+    <h3>{{event.name}}</h3>
+    <img v-if="event.images" img :src="event.images[0].url" :alt="event.name">
+    <p v-if="event.classifications">What: {{event.classifications[0].segment.name}}</p>
+    <p v-if="event.dates">When: {{event.dates.start.localTime}} - {{event.dates.start.localDate}} </p>
+    <p v-if="event._embedded">Where: {{event._embedded.venues[0].city.name}}</p>
+    <button type="button" name="button">Randomize</button>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
+
+@Component
+export default class Randomizer extends Vue {
+  //Set the intial state
+  private event: object = {};
+  private loading = false;
+  private error = false;
+
+
+  mounted() {
+    //Display loader while fetching the event data from the api
+    this.loading = true
+
+    axios.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=date,asc')
+     .then((response)  => {
+       this.event = response.data._embedded.events[0]
+       }
+     )
+     .catch((error: Error) => {
+       this.error = true
+       console.log(error)
+       }
+     )
+     .finally(() :void => {
+       this.loading = false
+     })
+  }
+}
+
+</script>
