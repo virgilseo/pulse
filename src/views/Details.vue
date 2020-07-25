@@ -8,9 +8,9 @@
     </p>
     <section v-if="event._embedded">
       Where:
-      <span v-if="event._embedded.venues[0]">{{event._embedded.venues[0].name}}</span>,
-      <span v-if="event._embedded.venues[0].address">{{event._embedded.venues[0].address.line1}} - </span>
-      <span v-if="event._embedded.venues[0].city.name">{{event._embedded.venues[0].city.name}}</span>
+      <slot v-if="event._embedded.venues[0].name">{{event._embedded.venues[0].name}} - </slot>
+      <slot v-if="event._embedded.venues[0].address">{{event._embedded.venues[0].address.line1}} - </slot>
+      <slot v-if="event._embedded.venues[0].city.name">{{event._embedded.venues[0].city.name}}</slot>
     </section>
     <p v-if="event.priceRanges">
       Prices from {{event.priceRanges[0].min}} to
@@ -35,9 +35,9 @@
           </p>
           <section v-if="relatedEvent._embedded">
             Where:
-            <span v-if="relatedEvent._embedded.venues[0]">{{relatedEvent._embedded.venues[0].name}}</span>
-            <span v-if="relatedEvent._embedded.venues[0].address">{{relatedEvent._embedded.venues[0].address.line1}} </span>
-            <span v-if="relatedEvent._embedded.venues[0].city.name">{{relatedEvent._embedded.venues[0].city.name}}</span>
+            <slot v-if="relatedEvent._embedded.venues[0].name">{{relatedEvent._embedded.venues[0].name}} - </slot>
+            <slot v-if="relatedEvent._embedded.venues[0].address">{{relatedEvent._embedded.venues[0].address.line1}} - </slot>
+            <slot v-if="relatedEvent._embedded.venues[0].city.name">{{relatedEvent._embedded.venues[0].city.name}}</slot>
           </section>
           <p v-if="relatedEvent.priceRanges">
             Prices from {{relatedEvent.priceRanges[0].min}} to
@@ -56,17 +56,17 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import axios from 'axios';
 
 //Crette event type interface
-type Segment = {
+type Venue = {
   id: string;
   name: string;
 }
-type Classifications = {
-  segment: Segment;
+type _Embedded = {
+  venues: Array<Venue>;
 }
 type EventStructure = {
-  _embedded: object;
+  _embedded: _Embedded;
   _links: object;
-  classifications: Array<Classifications>;
+  classifications: Array<object>;
   date: object;
   id: string;
   images: Array<object>;
@@ -99,7 +99,7 @@ export default class Home extends Vue {
   mounted() {
     //Display loader while fetching the events data from the api
     this.loading = true
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=3&keyword=${this.event.classifications[0].segment.name}`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&page=1&size=3&sort=random&venueId=${this.event._embedded.venues[0].id}`)
       .then((response: Response) => {
         this.relatedEvents = response.data._embedded.events
       })
