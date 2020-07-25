@@ -24,6 +24,18 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 
+
+//Create response interface
+type Events = {
+  events: Array<object>;
+}
+type Embedded = {
+  _embedded: Events;
+}
+type Response = {
+  data: Embedded;
+}
+
 @Component
 export default class Home extends Vue {
 
@@ -39,16 +51,16 @@ export default class Home extends Vue {
     this.loading = true
 
     axios.get('https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random')
-     .then(response  => {
+     .then((response: Response)  => {
        this.events = response.data._embedded.events
        }
      )
-     .catch(error => {
+     .catch((error: Error) => {
        this.error = true
        console.log(error)
        }
      )
-     .finally(() => {
+     .finally(() :void => {
        this.loading = false
      })
   }

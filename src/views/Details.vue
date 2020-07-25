@@ -55,11 +55,42 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import axios from 'axios';
 
+//Crette event type interface
+type Segment = {
+  id: string;
+  name: string;
+}
+type Classifications = {
+  segment: Segment;
+}
+type EventStructure = {
+  _embedded: object;
+  _links: object;
+  classifications: Array<Classifications>;
+  date: object;
+  id: string;
+  images: Array<object>;
+  name: string;
+  priceRanges: Array<object>;
+  url: string;
+}
+//Create response interface
+type Events = {
+  events: Array<object>;
+}
+type Embedded = {
+  _embedded: Events;
+}
+type Response = {
+  data: Embedded;
+}
+
 @Component
 export default class Home extends Vue {
   //Set props
-  @Prop() private eventId!: string
-  @Prop() private event!: object
+  @Prop() private eventId!: string;
+  @Prop({type: Object as () => EventStructure })
+  public event!: EventStructure;
   //Set the innitial state
   private relatedEvents: Array<object> = []
   private loading = false
@@ -69,14 +100,14 @@ export default class Home extends Vue {
     //Display loader while fetching the events data from the api
     this.loading = true
     axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=3&keyword=${this.event.classifications[0].segment.name}`)
-      .then(response => {
+      .then((response: Response) => {
         this.relatedEvents = response.data._embedded.events
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.error = true
         console.log(error)
       })
-      .finally(() => {
+      .finally(() :void => {
         this.loading = false
       })
   }
