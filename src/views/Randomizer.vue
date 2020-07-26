@@ -54,12 +54,10 @@ export default class Randomizer extends Vue {
       "date,desc",
       "relevance,asc",
       "relevance,desc",
-      "distance,asc",
       "name,date,asc",
       "name,date,desc",
       "date,name,asc",
       "date,name,desc",
-      "distance,date,asc",
       "onSaleStartDate,asc",
       "id,asc",
       "venueName,asc",
@@ -72,10 +70,8 @@ export default class Randomizer extends Vue {
       "Music",
       "Miscellaneous",
       "Arts & Theatre",
-      "Sports",
       "Electronic",
       "Hip Hop",
-      "Classical",
       "Metal",
       "Jazz"
     ];
