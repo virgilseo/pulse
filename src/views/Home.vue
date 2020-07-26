@@ -7,35 +7,45 @@
     <section v-else-if="error">
       <p>Something went wrong. Please try again later</p>
     </section>
-    <ul v-else>
-      <li v-for="eventItem in events" :key="eventItem.id">
-        <h3>{{ eventItem.name }}</h3>
-        <img
-          v-if="eventItem.images"
-          img
-          :src="eventItem.images[0].url"
-          :alt="eventItem.name"
-        />
-        <p v-if="eventItem.classifications">
-          What: {{ eventItem.classifications[0].segment.name }}
-        </p>
-        <p v-if="eventItem.dates.start">
-          When: {{ eventItem.dates.start.localTime }} -
-          {{ eventItem.dates.start.localDate }}
-        </p>
-        <p v-if="eventItem._embedded.venues[0].address">
-          Where: {{ eventItem._embedded.venues[0].address.line1 }},
-          {{ eventItem._embedded.venues[0].city.name }}
-        </p>
-        <router-link
-          :to="{
-            name: 'details',
-            params: { eventId: eventItem.id, event: eventItem }
-          }"
-          >More details</router-link
-        >
-      </li>
-    </ul>
+    <section class="events-container" v-else>
+      <label for="sort">Sort: </label>
+      <select class="sort-events" name="sort" @change="sortEvents" v-model="sortOption">
+        <option value="" disabled >by</option>
+        <option value="name.asc">name.asc</option>
+        <option value="name.desc">name.desc</option>
+        <option value="date.asc">date.asc</option>
+        <option value="date.desc">date.desc</option>
+      </select>
+      <ul>
+        <li v-for="eventItem in events" :key="eventItem.id">
+          <h3>{{ eventItem.name }}</h3>
+          <img
+            v-if="eventItem.images"
+            img
+            :src="eventItem.images[0].url"
+            :alt="eventItem.name"
+          />
+          <p v-if="eventItem.classifications">
+            What: {{ eventItem.classifications[0].segment.name }}
+          </p>
+          <p v-if="eventItem.dates.start">
+            When: {{ eventItem.dates.start.localTime }} -
+            {{ eventItem.dates.start.localDate }}
+          </p>
+          <p v-if="eventItem._embedded.venues[0].address">
+            Where: {{ eventItem._embedded.venues[0].address.line1 }},
+            {{ eventItem._embedded.venues[0].city.name }}
+          </p>
+          <router-link
+            :to="{
+              name: 'details',
+              params: { eventId: eventItem.id, event: eventItem }
+            }"
+            >More details</router-link
+          >
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -60,6 +70,7 @@ export default class Home extends Vue {
   private events: Array<object> = [];
   private loading = false;
   private error = false;
+  private sortOption = '';
 
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
@@ -81,6 +92,50 @@ export default class Home extends Vue {
       .finally((): void => {
         this.loading = false;
       });
+  }
+  //Sort events by date and name (acending and descending)
+  private sortEvents() : void {
+    switch(this.sortOption) {
+      case "name.asc": {
+      const byName = this.events.slice(0);
+      byName.sort(function(a,b) {
+      	const x = a.name.toLowerCase();
+	      const y = b.name.toLowerCase();
+	      return x < y ? -1 : x > y ? 1 : 0;
+      });
+      this.events = byName;
+      }
+      break;
+      case "name.desc": {
+      const byName = this.events.slice(0);
+      byName.sort(function(a,b) {
+      	const x = a.name.toLowerCase();
+	      const y = b.name.toLowerCase();
+	      return x > y ? -1 : x > y ? 1 : 0;
+      });
+      this.events = byName;
+      }
+      break;
+      case "date.asc": {
+        const byDate = this.events.slice(0);
+        byDate.sort(function(a,b) {
+          const x = Date.parse(a.dates.start.localDate);
+          const y = Date.parse(b.dates.start.localDate);
+          return x - y;
+        });
+      this.events = byDate;
+      }
+      break;
+      case "date.desc": {
+        const byDate = this.events.slice(0);
+        byDate.sort(function(a,b) {
+          const x = Date.parse(a.dates.start.localDate);
+          const y = Date.parse(b.dates.start.localDate);
+          return x > y ? -1 : x > y ? 1 : 0;
+        });
+      this.events = byDate;
+      }
+    }
   }
 }
 </script>
