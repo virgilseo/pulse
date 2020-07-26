@@ -16,7 +16,7 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Randomizer.vue")
   },
   {
-    path:"/:eventId/details",
+    path: "/:eventId/details",
     name: "details",
     component: () => import("../views/Details.vue"),
     props: true
