@@ -1,5 +1,8 @@
 <template>
   <div class="randomizer">
+    <section v-if="loading">
+      <p>Loading...</p>
+    </section>
     <h3>{{ event.name }}</h3>
     <img v-if="event.images" img :src="event.images[0].url" :alt="event.name" />
     <p v-if="event.classifications">
