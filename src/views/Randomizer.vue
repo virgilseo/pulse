@@ -3,19 +3,24 @@
     <section v-if="loading">
       <p>Loading...</p>
     </section>
-    <h3>{{ event.name }}</h3>
-    <img v-if="event.images" img :src="event.images[0].url" :alt="event.name" />
-    <p v-if="event.classifications">
-      What: {{ event.classifications[0].segment.name }}
-    </p>
-    <p v-if="event.dates">
-      When: {{ event.dates.start.localTime }} -
-      {{ event.dates.start.localDate }}
-    </p>
-    <p v-if="event._embedded">
-      Where: {{ event._embedded.venues[0].city.name }}
-    </p>
-    <button @click="randomize" type="button" name="button">Randomize</button>
+    <section v-else-if="error">
+      <p>Something went wrong. Please try again later</p>
+    </section>
+    <section v-else>
+      <h3>{{ event.name }}</h3>
+      <img v-if="event.images" img :src="event.images[0].url" :alt="event.name" />
+      <p v-if="event.classifications">
+        What: {{ event.classifications[0].segment.name }}
+      </p>
+      <p v-if="event.dates">
+        When: {{ event.dates.start.localTime }} -
+        {{ event.dates.start.localDate }}
+      </p>
+      <p v-if="event._embedded">
+        Where: {{ event._embedded.venues[0].city.name }}
+      </p>
+      <button @click="randomize" type="button" name="button">Randomize</button>
+    </section>
   </div>
 </template>
 
