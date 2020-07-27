@@ -38,10 +38,28 @@ export default class Randomizer extends Vue {
   mounted() {
     //Display loader while fetching the event data from the api
     this.loading = true;
-
+    //Sort terms for randomizing the first event shown on the page
+    const sortTerms = [
+      "name,asc",
+      "name,desc",
+      "date,asc",
+      "date,desc",
+      "relevance,asc",
+      "relevance,desc",
+      "name,date,asc",
+      "name,date,desc",
+      "date,name,asc",
+      "date,name,desc",
+      "onSaleStartDate,asc",
+      "id,asc",
+      "venueName,asc",
+      "venueName,desc",
+      "random"
+    ];
+    const sortItem = sortTerms[(sortTerms.length * Math.random()) | 0];
     axios
       .get(
-        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=random`
+        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=${sortItem}`
       )
       .then(response => {
         this.event = response.data._embedded.events[0];
