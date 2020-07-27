@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import axios from "axios";
 
 //Create response interface
@@ -80,7 +80,7 @@ export default class Home extends Vue {
 
     axios
       .get(
-        "https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random"
+        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random`
       )
       .then((response: Response) => {
         this.events = response.data._embedded.events;
@@ -136,6 +136,29 @@ export default class Home extends Vue {
       this.events = byDate;
       }
     }
+  }
+  //Get current categorie selection form the vuex store
+  get currentCategorie(): string {
+    return this.$store.state.currentCategorie
+  }
+  //Set up watcher for the the computed(the current categorie selected by the user) property
+  @Watch('currentCategorie')
+  categorieChanged(newVal): void {
+    this.loading = true;
+    //Request events based on the categorie selected by the user(music, art & theatre, etc.)
+    axios.get(
+      `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${newVal}`
+    )
+    .then((response: Response) => {
+      this.events = response.data._embedded.events;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+      this.error = true
+    })
+    .finally((): void => {
+      this.loading = false
+    })
   }
 }
 </script>

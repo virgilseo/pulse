@@ -8,8 +8,7 @@
         <option value="" disabled>select</option>
         <option value="music">music</option>
         <option value="Arts & Theatre">arts and theatre</option>
-        <option value="Miscellaneous">miscellaneous</option>
-        <option value="Sports">sports</option>
+        <option value="Miscellaneous">other</option>
       </select>
     </div>
     <router-view />
@@ -22,9 +21,10 @@ import { Component, Vue } from "vue-property-decorator";
 export default class App extends Vue {
   //Set the initial data state
   private categorie = '';
-
+  //Update global state variable with the current categorie selection
   private changeCategorie(): void {
     console.log(this.categorie)
+    this.$store.commit("updateCategorie", this.categorie)
   }
 }
 </script>
