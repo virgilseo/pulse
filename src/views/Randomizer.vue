@@ -28,6 +28,28 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 
+//Create artist interface
+type EventStructure = {
+  _embedded: object;
+  _links: object;
+  classifications: Array<object>;
+  dates: object;
+  id: string;
+  images: Array<object>;
+  name: string;
+  priceRanges: Array<object>;
+  url: string;
+};
+//Create response interface
+type Events = {
+  events: Array<EventStructure>;
+};
+type Embedded = {
+  _embedded: Events;
+};
+type Response = {
+  data: Embedded;
+};
 @Component
 export default class Randomizer extends Vue {
   //Set the intial state
@@ -61,7 +83,7 @@ export default class Randomizer extends Vue {
       .get(
         `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=${sortItem}`
       )
-      .then(response => {
+      .then((response: Response) => {
         this.event = response.data._embedded.events[0];
       })
       .catch((error: Error) => {
@@ -109,7 +131,7 @@ export default class Randomizer extends Vue {
       .get(
         `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=${sortItem}&classificationName=${classItem}`
       )
-      .then(response => {
+      .then((response: Response) => {
         this.event = response.data._embedded.events[0];
       })
       .catch((error: Error) => {

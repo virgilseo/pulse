@@ -53,9 +53,27 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import axios from "axios";
 
+//Create event type interface
+type start = {
+  localDate: string;
+}
+type dates = {
+  start: start;
+};
+type EventStructure = {
+  _embedded: object;
+  _links: object;
+  classifications: Array<object>;
+  dates: dates;
+  id: string;
+  images: Array<object>;
+  name: string;
+  priceRanges: Array<object>;
+  url: string;
+};
 //Create response interface
 type Events = {
-  events: Array<object>;
+  events: Array<EventStructure>;
 };
 type Embedded = {
   _embedded: Events;
@@ -67,7 +85,7 @@ type Response = {
 @Component
 export default class Home extends Vue {
   //Set the intial data state
-  private events: Array<object> = [];
+  private events: Array<EventStructure> = [];
   private loading = false;
   private error = false;
   private sortOption = '';
@@ -138,12 +156,12 @@ export default class Home extends Vue {
     }
   }
   //Get current categorie selection form the vuex store
-  get currentCategorie(): string {
+  get currentCategorie() {
     return this.$store.state.currentCategorie
   }
   //Set up watcher for the the computed(the current categorie selected by the user) property
   @Watch('currentCategorie')
-  categorieChanged(newVal): void {
+  categorieChanged(newVal: string): void {
     this.loading = true;
     //Request events based on the categorie selected by the user(music, art & theatre, etc.)
     axios.get(

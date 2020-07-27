@@ -109,7 +109,7 @@ type EventStructure = {
 };
 //Create response interface
 type Events = {
-  events: Array<object>;
+  events: Array<EventStructure>;
 };
 type Embedded = {
   _embedded: Events;
@@ -125,7 +125,7 @@ export default class Home extends Vue {
   @Prop({ type: Object as () => EventStructure })
   public event!: EventStructure;
   //Set the innitial state
-  private relatedEvents: Array<object> = [];
+  private relatedEvents: Array<EventStructure> = [];
   private loading = false;
   private error = false;
   //Get 3 related events form the api after the component mounts
