@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/randomizer">Randomizer</router-link> |
@@ -16,8 +17,13 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Header from './components/Header.vue';
 
-@Component
+@Component({
+  components: {
+    Header
+  }
+})
 export default class App extends Vue {
   //Set the initial data state
   private categorie = '';
