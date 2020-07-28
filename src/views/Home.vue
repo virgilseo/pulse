@@ -37,6 +37,7 @@
             {{ eventItem._embedded.venues[0].city.name }}
           </p>
           <router-link
+            @click.native="saveEvent(eventItem)"
             :to="{
               name: 'details',
               params: { eventId: eventItem.id, event: eventItem }
@@ -158,6 +159,10 @@ export default class Home extends Vue {
   //Get current categorie selection form the vuex store
   get currentCategorie() {
     return this.$store.state.currentCategorie
+  }
+  //Save current event in local localStorage
+  private saveEvent(eventItem: object): void {
+    localStorage.setItem('currentEvent', JSON.stringify(eventItem));
   }
   //Set up watcher for the the computed(the current categorie selected by the user) property
   @Watch('currentCategorie')

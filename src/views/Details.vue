@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import axios from "axios";
 
 //Crette event type interface
@@ -122,12 +122,13 @@ type Response = {
 export default class Home extends Vue {
   //Set props
   @Prop() private eventId!: string;
-  @Prop({ type: Object as () => EventStructure })
-  public event!: EventStructure;
+//  @Prop({ type: Object as () => EventStructure })
+  //public eventItem!: EventStructure;
   //Set the innitial state
   private relatedEvents: Array<EventStructure> = [];
   private loading = false;
   private error = false;
+
   //Get 3 related events form the api after the component mounts
   mounted() {
     //Display loader while fetching the events data from the api
@@ -146,6 +147,14 @@ export default class Home extends Vue {
       .finally((): void => {
         this.loading = false;
       });
+  }
+  //Perssist event entity after page refresh
+  get event() {
+    if(this.$attrs.event) {
+      return this.$attrs.event;
+    } else {
+      return this.$store.state.localEvent;
+    }
   }
 }
 </script>
