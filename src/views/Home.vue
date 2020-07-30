@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Amsterdam Events</h1>
+    <h3>Amsterdam Events</h3>
     <section v-if="loading">
       <p>Loading...</p>
     </section>
@@ -17,7 +17,7 @@
         <option value="date.desc">date.desc</option>
       </select>
       <ul>
-        <li v-for="eventItem in events" :key="eventItem.id">
+        <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
           <h3>{{ eventItem.name }}</h3>
           <img
             v-if="eventItem.images"
@@ -26,14 +26,14 @@
             :alt="eventItem.name"
           />
           <p v-if="eventItem.classifications">
-            What: {{ eventItem.classifications[0].segment.name }}
+            <span class="event-subtitle">Categorie</span> {{ eventItem.classifications[0].segment.name }}
           </p>
           <p v-if="eventItem.dates.start">
-            When: {{ eventItem.dates.start.localTime }} -
+            <span class="event-subtitle">When</span> {{ eventItem.dates.start.localTime }} -
             {{ eventItem.dates.start.localDate }}
           </p>
           <p v-if="eventItem._embedded.venues[0].address">
-            Where: {{ eventItem._embedded.venues[0].address.line1 }},
+            <span class="event-subtitle">Where</span> {{ eventItem._embedded.venues[0].address.line1 }},
             {{ eventItem._embedded.venues[0].city.name }}
           </p>
           <router-link

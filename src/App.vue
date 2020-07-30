@@ -2,8 +2,8 @@
   <div id="app">
     <Header />
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/randomizer">Randomizer</router-link> |
+      <router-link to="/">Home</router-link>
+      <router-link to="/randomizer">Randomizer</router-link> 
       <div v-if="currentPage === 'Home'" class="categories-container">
         <label for="categories">Categories </label>
         <select class="select" name="categories" @change="changeCategorie" v-model="categorie">

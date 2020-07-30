@@ -1,35 +1,37 @@
 <template>
   <div class="details-page">
     <router-link to="/">Back to events</router-link>
-    <h1>{{ event.name }}</h1>
-    <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
-    <p v-if="event.dates">
-      When: {{ event.dates.start.localTime }} -
-      {{ event.dates.start.localDate }}
-    </p>
-    <section v-if="event._embedded">
-      Where:
-      <slot v-if="event._embedded.venues[0].name"
-        >{{ event._embedded.venues[0].name }} -
-      </slot>
-      <slot v-if="event._embedded.venues[0].address"
-        >{{ event._embedded.venues[0].address.line1 }} -
-      </slot>
-      <slot v-if="event._embedded.venues[0].city.name">{{
-        event._embedded.venues[0].city.name
-      }}</slot>
-    </section>
-    <p v-if="event.priceRanges">
-      Prices from {{ event.priceRanges[0].min }} to
-      {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
-    </p>
-    <p><a v-if="event.url" :href="event.url">Get tickets</a></p>
-    <p>
-      <a v-if="event.seatmap" :href="event.seatmap.staticUrl"
-        >Check out the seat map</a
-      >
-    </p>
-    <p />
+    <div class="event-item">
+      <h1>{{ event.name }}</h1>
+      <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
+      <p v-if="event.dates">
+        When: {{ event.dates.start.localTime }} -
+        {{ event.dates.start.localDate }}
+      </p>
+      <section v-if="event._embedded">
+        Where:
+        <slot v-if="event._embedded.venues[0].name"
+          >{{ event._embedded.venues[0].name }} -
+        </slot>
+        <slot v-if="event._embedded.venues[0].address"
+          >{{ event._embedded.venues[0].address.line1 }} -
+        </slot>
+        <slot v-if="event._embedded.venues[0].city.name">{{
+          event._embedded.venues[0].city.name
+        }}</slot>
+      </section>
+      <p v-if="event.priceRanges">
+        Prices from {{ event.priceRanges[0].min }} to
+        {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
+      </p>
+      <p><a v-if="event.url" :href="event.url">Get tickets</a></p>
+      <p>
+        <a v-if="event.seatmap" :href="event.seatmap.staticUrl"
+          >Check out the seat map</a
+        >
+      </p>
+      <p />
+    </div>
     <section class="related-events">
       <h3>You might also like:</h3>
       <section v-if="loading">
@@ -39,7 +41,7 @@
         <p>Something went wrong. Please try again later</p>
       </section>
       <ul>
-        <li v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
+        <li class="event-item" v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
           <h1>{{ relatedEvent.name }}</h1>
           <img
             v-if="relatedEvent.images"

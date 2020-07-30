@@ -1,21 +1,26 @@
 <template>
   <div class="footer-container">
     <footer>
-      <ul>
-        <li
-          v-for="route in siteMap.options.routes"
-          :key="route.index"
-        >
-          <router-link
-          v-if="route.name !== 'details'"
-          :to="route.path"
+      <div class="nav-container">
+        <h3 class="nav-title">Quick navigation</h3>
+        <ul>
+          <li
+            v-for="route in siteMap.options.routes"
+            :key="route.index"
           >
-          {{route.name}}
-        </router-link>
-        </li>
-      </ul>
-      <p><slot>©</slot> 2019 Virgil Avram</p>
-      <p>Powered by the TicketMaster Api</p>
+            <router-link
+            v-if="route.name !== 'details'"
+            :to="route.path"
+            >
+            {{route.name}}
+          </router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="attr-container">
+        <p><slot>©</slot> 2020 Virgil Avram</p>
+        <p>Powered by the TicketMaster Api</p>
+      </div>
     </footer>
   </div>
 </template>
@@ -27,7 +32,7 @@
  @Component
  export default class Footer extends Vue {
    //Import generated site map
-   get siteMap()  {
+   get siteMap() {
      return sitemapMiddleware;
    }
  }
