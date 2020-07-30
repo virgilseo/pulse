@@ -1,6 +1,8 @@
 <template>
   <div class="details-page">
-    <router-link to="/">Back to events</router-link>
+    <div class="link-container">
+      <router-link to="/">Back to events</router-link>
+    </div>
     <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
       <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />

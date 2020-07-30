@@ -2,17 +2,19 @@
   <div id="app">
     <Header />
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/randomizer">Randomizer</router-link>
-      <div v-if="currentPage === 'Home'" class="categories-container">
-        <label class="categories-label" for="categories">Categories </label>
-        <select class="select" name="categories" @change="changeCategorie" v-model="categorie">
-          <option value="" disabled>select</option>
-          <option value="music">music</option>
-          <option value="Arts & Theatre">arts and theatre</option>
-          <option value="Miscellaneous">other</option>
-        </select>
-      </div>
+      <div class="inner-nav">
+        <router-link to="/">Home</router-link>
+        <router-link to="/randomizer">Randomizer</router-link>
+        <div v-if="currentPage === 'Home'" class="categories-container">
+          <label class="categories-label" for="categories">Categories </label>
+          <select class="select" name="categories" @change="changeCategorie" v-model="categorie">
+            <option value="" disabled>select</option>
+            <option value="music">music</option>
+            <option value="Arts & Theatre">arts and theatre</option>
+            <option value="Miscellaneous">other</option>
+          </select>
+        </div>
+      </div>    
     </div>
     <router-view />
     <Footer />

@@ -91,7 +91,15 @@ img {
 .categories-label {
   font-weight: 600;
 }
+/*Details*/
 
+.event-details {
+  padding: 0px 30px;
+}
+
+.link-container {
+  padding: 10px 0px;
+}
 
 /*Randomizer*/
 
@@ -102,7 +110,7 @@ img {
 /*Fotter*/
 
 .footer-container {
-  padding-left: 20px 5%;
+  padding: 20px 5%;
   background: #F7FAFC;
 }
 

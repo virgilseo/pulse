@@ -10,14 +10,22 @@
     width: 45%;
   }
 
-  .event-details, .event-randomize {
-    width: 50%;
-    margin: auto;
-    text-align: center;
-  }
+
 
   .footer {
     display: flex;
     justify-content: space-around;
   }
+}
+
+@media only screen and (min-width: 850px) {
+  .home, .randomizer, .details-page, .inner-header, .footer, .inner-nav {
+    width: 850px;
+    margin: auto;
+  }
+
+  .header-container, #nav {
+    padding-left: 0;
+  }
+
 }
