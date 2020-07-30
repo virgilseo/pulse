@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -232,4 +233,21 @@ a {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/*Scroll button*/
+.scroll-icon {
+  color: #F6AD55;
+  padding: 6px;
+  background: #fff;
+  border-radius: 50%;
+  font-weight: 400;
+  border: 2px solid #F6AD55;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+}
+
+.scroll-container {
+  position: fixed;
+  right: 60px;
+  bottom: 20px;
 }

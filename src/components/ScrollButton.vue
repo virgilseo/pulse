@@ -1,5 +1,7 @@
 <template>
-  <div class="scroll-containner">
-    <i class="material-icons">arrow_upward</i>    
+  <div class="scroll-container">
+    <a class="scroll-link" href="#">
+      <i class="material-icons scroll-icon">arrow_upward</i>
+    </a>
   </div>
 </template>

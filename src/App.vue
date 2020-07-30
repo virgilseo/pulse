@@ -14,9 +14,10 @@
             <option value="Miscellaneous">other</option>
           </select>
         </div>
-      </div>    
+      </div>
     </div>
     <router-view />
+    <ScrollButton v-if="scroll" />
     <Footer />
   </div>
 </template>
@@ -24,23 +25,35 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import ScrollButton from './components/ScrollButton.vue';
 
 @Component({
   components: {
     Header,
-    Footer
+    Footer,
+    ScrollButton
   }
 })
 export default class App extends Vue {
   //Set the initial data state
   private categorie = '';
+  private scroll = false;
   //Update global state variable with the current categorie selection
   private changeCategorie(): void {
-    console.log(this.categorie)
     this.$store.commit("updateCategorie", this.categorie)
   }
   get currentPage(): string {
     return this.$route.name || '';
+  }
+  //Set up event listener for scroll position
+  created() {
+    window.addEventListener('scroll', this.showButon);
+  }
+  destroyed() {
+    window.removeEventListener('scroll', this.showButon);
+  }
+  private showButon(): void {
+    window.scrollY > 600 ? this.scroll = true : this.scroll = false;
   }
 }
 </script>
