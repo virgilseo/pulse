@@ -1,0 +1,23 @@
+@media only screen and (min-width: 600px) {
+
+  .event-list, .related-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .event-item {
+    width: 45%;
+  }
+
+  .event-details, .event-randomize {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-around;
+  }
+}

@@ -16,7 +16,7 @@
         <option value="date.asc">date.asc</option>
         <option value="date.desc">date.desc</option>
       </select>
-      <ul>
+      <ul class="event-list">
         <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
           <h3>{{ eventItem.name }}</h3>
           <img
@@ -29,12 +29,12 @@
             <span class="event-subtitle">Categorie</span> {{ eventItem.classifications[0].segment.name }}
           </p>
           <p v-if="eventItem.dates.start">
-            <span class="event-subtitle">When</span> {{ eventItem.dates.start.localTime }} -
+            <span class="event-subtitle">When</span> {{ eventItem.dates.start.localTime }}
             {{ eventItem.dates.start.localDate }}
           </p>
           <p v-if="eventItem._embedded.venues[0].address">
             <span class="event-subtitle">Where</span> {{ eventItem._embedded.venues[0].address.line1 }},
-            {{ eventItem._embedded.venues[0].city.name }}
+             {{ eventItem._embedded.venues[0].city.name }}
           </p>
           <router-link
             @click.native="saveEvent(eventItem)"

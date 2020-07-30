@@ -1,6 +1,6 @@
 <template>
   <div class="footer-container">
-    <footer>
+    <footer class="footer">
       <div class="nav-container">
         <h3 class="nav-title">Quick navigation</h3>
         <ul>

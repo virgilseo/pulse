@@ -1,27 +1,27 @@
 <template>
   <div class="details-page">
     <router-link to="/">Back to events</router-link>
-    <div class="event-item">
+    <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
       <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
       <p v-if="event.dates">
-        When: {{ event.dates.start.localTime }} -
+        <span class="event-subtitle">When</span> {{ event.dates.start.localTime }}
         {{ event.dates.start.localDate }}
       </p>
       <section v-if="event._embedded">
-        Where:
+        <span class="event-subtitle">Where </span>
         <slot v-if="event._embedded.venues[0].name"
-          >{{ event._embedded.venues[0].name }} -
+          >{{ event._embedded.venues[0].name }},
         </slot>
         <slot v-if="event._embedded.venues[0].address"
-          >{{ event._embedded.venues[0].address.line1 }} -
+          >{{ event._embedded.venues[0].address.line1 }}
         </slot>
         <slot v-if="event._embedded.venues[0].city.name">{{
           event._embedded.venues[0].city.name
         }}</slot>
       </section>
       <p v-if="event.priceRanges">
-        Prices from {{ event.priceRanges[0].min }} to
+        <span class="event-subtitle">Prices from</span> {{ event.priceRanges[0].min }} to
         {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
       </p>
       <p><a v-if="event.url" :href="event.url">Get tickets</a></p>
@@ -40,7 +40,7 @@
       <section v-if="error">
         <p>Something went wrong. Please try again later</p>
       </section>
-      <ul>
+      <ul class="related-list">
         <li class="event-item" v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
           <h1>{{ relatedEvent.name }}</h1>
           <img
@@ -49,23 +49,23 @@
             :alt="relatedEvent.name"
           />
           <p v-if="relatedEvent.dates">
-            When: {{ relatedEvent.dates.start.localTime }} -
+            <span class="event-subtitle">When</span> {{ relatedEvent.dates.start.localTime }} -
             {{ relatedEvent.dates.start.localDate }}
           </p>
           <section v-if="relatedEvent._embedded">
-            Where:
+            <span class="event-subtitle">Where </span>
             <slot v-if="relatedEvent._embedded.venues[0].name"
-              >{{ relatedEvent._embedded.venues[0].name }} -
+              >{{ relatedEvent._embedded.venues[0].name }},
             </slot>
             <slot v-if="relatedEvent._embedded.venues[0].address"
-              >{{ relatedEvent._embedded.venues[0].address.line1 }} -
+              >{{ relatedEvent._embedded.venues[0].address.line1 }}
             </slot>
             <slot v-if="relatedEvent._embedded.venues[0].city.name">{{
               relatedEvent._embedded.venues[0].city.name
             }}</slot>
           </section>
           <p v-if="relatedEvent.priceRanges">
-            Prices from {{ relatedEvent.priceRanges[0].min }} to
+            <span class="event-subtitle">Prices from</span> {{ relatedEvent.priceRanges[0].min }} to
             {{ relatedEvent.priceRanges[0].max }}
             {{ relatedEvent.priceRanges[0].currency }}
           </p>
