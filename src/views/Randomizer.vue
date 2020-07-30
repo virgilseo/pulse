@@ -1,7 +1,9 @@
 <template>
   <div class="randomizer">
     <section v-if="loading">
-      <p>Loading...</p>
+      <div class='loader-container'>
+        <div class='loader'></div>
+      </div>
     </section>
     <section v-else-if="error">
       <p>Something went wrong. Please try again later</p>
