@@ -20,7 +20,7 @@
         <p v-if="event._embedded">
           <span class="event-subtitle">Where</span> {{ event._embedded.venues[0].city.name }}
         </p>
-        <button @click="randomize" type="button" name="button">Randomize</button>
+        <button class="randomize-btn" @click="randomize" type="button" name="button">Randomize</button>
       </div>
     </section>
   </div>

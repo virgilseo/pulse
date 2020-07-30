@@ -10,11 +10,12 @@
     width: 45%;
   }
 
-
-
   .footer {
     display: flex;
     justify-content: space-around;
+  }
+  .inner-nav {
+    display: flex;
   }
 }
 

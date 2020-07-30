@@ -9,6 +9,7 @@
             :key="route.index"
           >
             <router-link
+            class="footer-links"
             v-if="route.name !== 'details'"
             :to="route.path"
             >
@@ -18,8 +19,8 @@
         </ul>
       </div>
       <div class="attr-container">
-        <p><slot>©</slot> 2020 Virgil Avram</p>
-        <p>Powered by the TicketMaster Api</p>
+        <p><span class="copy-icon">©</span> 2020 Virgil Avram</p>
+        <p>Powered by the <a  class="attr-link" href="https://developer.ticketmaster.com/products-and-docs/apis/getting-started/">TicketMaster Api</a></p>
       </div>
     </footer>
   </div>

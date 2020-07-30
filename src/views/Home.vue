@@ -8,7 +8,7 @@
       <p>Something went wrong. Please try again later</p>
     </section>
     <section class="events-container" v-else>
-      <label for="sort">Sort: </label>
+      <label class="sort" for="sort">Sort </label>
       <select class="sort-events" name="sort" @change="sortEvents" v-model="sortOption">
         <option value="" disabled >by</option>
         <option value="name.asc">name.asc</option>
@@ -37,6 +37,7 @@
              {{ eventItem._embedded.venues[0].city.name }}
           </p>
           <router-link
+            class="details-btn"
             @click.native="saveEvent(eventItem)"
             :to="{
               name: 'details',

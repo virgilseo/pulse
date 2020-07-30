@@ -1,7 +1,12 @@
 <template>
   <div class="details-page">
     <div class="link-container">
-      <router-link to="/">Back to events</router-link>
+      <router-link class="back-link" to="/">
+        <i class="material-icons back-icon">
+         arrow_back
+       </i>
+        Back to events
+      </router-link>
     </div>
     <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
@@ -26,16 +31,16 @@
         <span class="event-subtitle">Prices from</span> {{ event.priceRanges[0].min }} to
         {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
       </p>
-      <p><a v-if="event.url" :href="event.url">Get tickets</a></p>
+      <p><a class="details-btn" v-if="event.url" :href="event.url">Get tickets</a></p>
       <p>
-        <a v-if="event.seatmap" :href="event.seatmap.staticUrl"
+        <a class="details-btn" v-if="event.seatmap" :href="event.seatmap.staticUrl"
           >Check out the seat map</a
         >
       </p>
       <p />
     </div>
     <section class="related-events">
-      <h3>You might also like:</h3>
+      <h3>You might also like...</h3>
       <section v-if="loading">
         <p>Loading...</p>
       </section>
@@ -72,10 +77,11 @@
             {{ relatedEvent.priceRanges[0].currency }}
           </p>
           <p>
-            <a v-if="relatedEvent.url" :href="relatedEvent.url">Get tickets</a>
+            <a class="details-btn" v-if="relatedEvent.url" :href="relatedEvent.url">Get tickets</a>
           </p>
           <p>
             <a
+              class="details-btn"
               v-if="relatedEvent.seatmap"
               :href="relatedEvent.seatmap.staticUrl"
               >Check out the seat map</a
