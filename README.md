@@ -25,7 +25,7 @@ The footer features a quick navigation container based on a generated site map. 
 Clone the current repository using: git clone https://github.com/virgilseo/pulse.git
 
 Next, from the project folder you need to open a terminal window and run the following command: npm install. After the installation has finished then run this command: npm run serve.
-After this a browser window will open on localhost:8090 and you can start using the app.
+After this a browser window will open on localhost:8080 and you can start using the app.
 
 If you close the browser window and want to use the app again just remember you can find the it @ localhost:8080.
 
