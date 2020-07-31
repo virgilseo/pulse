@@ -31,9 +31,9 @@
         <span class="event-subtitle">Prices from</span> {{ event.priceRanges[0].min }} to
         {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
       </p>
-      <p><a class="details-btn" v-if="event.url" :href="event.url">Get tickets</a></p>
+      <p><a class="details-btn" v-if="event.url" :href="event.url" target="_blank">Get tickets</a></p>
       <p>
-        <a class="details-btn" v-if="event.seatmap" :href="event.seatmap.staticUrl"
+        <a class="details-btn" v-if="event.seatmap" :href="event.seatmap.staticUrl" target="_blank"
           >Check out the seat map</a
         >
       </p>
@@ -77,13 +77,14 @@
             {{ relatedEvent.priceRanges[0].currency }}
           </p>
           <p>
-            <a class="details-btn" v-if="relatedEvent.url" :href="relatedEvent.url">Get tickets</a>
+            <a class="details-btn" v-if="relatedEvent.url" :href="relatedEvent.url" target="_blank">Get tickets</a>
           </p>
           <p>
             <a
               class="details-btn"
               v-if="relatedEvent.seatmap"
               :href="relatedEvent.seatmap.staticUrl"
+              target="_blank"
               >Check out the seat map</a
             >
           </p>
