@@ -7,7 +7,7 @@ Event planner app featuring select events in the city of Amsterdam.
 * [Instructions](#instructions)
 * [Installation](#installation)
 * [Api](#api)
-* [Vue.js](#vue.js)
+* [Vue](#vue)
 
 ## Instructions
 
@@ -29,12 +29,11 @@ After this a browser window will open on localhost:8090 and you can start using 
 
 If you close the browser window and want to use the app again just remember you can find the it @ localhost:8080.
 
-
 ## Api
 The application uses third party api to display the map and fetch information about the events.
 
 1. Ticket Master Api: https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
-##Vue.js
+## Vue
 
 The app was build using a powerful javascript front end framework, called Vue.js. Here is a link to their home page: https://vuejs.org/
