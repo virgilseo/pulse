@@ -237,12 +237,11 @@ a {
 
 /*Scroll button*/
 .scroll-icon {
-  color: #F6AD55;
-  padding: 6px;
-  background: #fff;
+  color: #fff;
+  padding: 8px;
+  background: #F6AD55;
   border-radius: 50%;
   font-weight: 400;
-  border: 2px solid #F6AD55;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
 }
 
@@ -250,4 +249,9 @@ a {
   position: fixed;
   right: 60px;
   bottom: 20px;
+}
+
+.scroll-container:hover {
+
+  cursor: pointer;
 }

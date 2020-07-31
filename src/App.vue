@@ -17,7 +17,7 @@
       </div>
     </div>
     <router-view />
-    <ScrollButton v-if="scroll" />
+    <ScrollButton :scrollTop="scrollTop" v-if="scroll" />
     <Footer />
   </div>
 </template>
@@ -54,6 +54,11 @@ export default class App extends Vue {
   }
   private showButon(): void {
     window.scrollY > 600 ? this.scroll = true : this.scroll = false;
+  }
+  private scrollTop() :void {
+    window.scrollTo({
+      top: 0
+    });
   }
 }
 </script>

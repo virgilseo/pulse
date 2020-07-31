@@ -1,7 +1,15 @@
 <template>
-  <div class="scroll-container">
-    <a class="scroll-link" href="#">
+  <div @click="scrollTop" class="scroll-container">
       <i class="material-icons scroll-icon">arrow_upward</i>
-    </a>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+
+@Component
+export default class ScrollButton extends Vue {
+@Prop() private scrollTop!: void;
+}
+
+</script>
