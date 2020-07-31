@@ -3,8 +3,8 @@
     <div class="link-container">
       <router-link class="back-link" to="/">
         <i class="material-icons back-icon">
-         arrow_back
-       </i>
+          arrow_back
+        </i>
         Back to events
       </router-link>
     </div>
@@ -12,7 +12,8 @@
       <h1>{{ event.name }}</h1>
       <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
       <p v-if="event.dates">
-        <span class="event-subtitle">When</span> {{ event.dates.start.localTime }}
+        <span class="event-subtitle">When</span>
+        {{ event.dates.start.localTime }}
         {{ event.dates.start.localDate }}
       </p>
       <section v-if="event._embedded">
@@ -28,12 +29,25 @@
         }}</slot>
       </section>
       <p v-if="event.priceRanges">
-        <span class="event-subtitle">Prices from</span> {{ event.priceRanges[0].min }} to
-        {{ event.priceRanges[0].max }} {{ event.priceRanges[0].currency }}
+        <span class="event-subtitle">Prices from</span>
+        {{ event.priceRanges[0].min }} to {{ event.priceRanges[0].max }}
+        {{ event.priceRanges[0].currency }}
       </p>
-      <p><a class="details-btn" v-if="event.url" :href="event.url" target="_blank">Get tickets</a></p>
       <p>
-        <a class="details-btn" v-if="event.seatmap" :href="event.seatmap.staticUrl" target="_blank"
+        <a
+          class="details-btn"
+          v-if="event.url"
+          :href="event.url"
+          target="_blank"
+          >Get tickets</a
+        >
+      </p>
+      <p>
+        <a
+          class="details-btn"
+          v-if="event.seatmap"
+          :href="event.seatmap.staticUrl"
+          target="_blank"
           >Check out the seat map</a
         >
       </p>
@@ -48,7 +62,11 @@
         <p>Something went wrong. Please try again later</p>
       </section>
       <ul class="related-list">
-        <li class="event-item" v-for="relatedEvent in relatedEvents" :key="relatedEvent.id">
+        <li
+          class="event-item"
+          v-for="relatedEvent in relatedEvents"
+          :key="relatedEvent.id"
+        >
           <h1>{{ relatedEvent.name }}</h1>
           <img
             v-if="relatedEvent.images"
@@ -56,7 +74,8 @@
             :alt="relatedEvent.name"
           />
           <p v-if="relatedEvent.dates">
-            <span class="event-subtitle">When</span> {{ relatedEvent.dates.start.localTime }} -
+            <span class="event-subtitle">When</span>
+            {{ relatedEvent.dates.start.localTime }} -
             {{ relatedEvent.dates.start.localDate }}
           </p>
           <section v-if="relatedEvent._embedded">
@@ -72,12 +91,19 @@
             }}</slot>
           </section>
           <p v-if="relatedEvent.priceRanges">
-            <span class="event-subtitle">Prices from</span> {{ relatedEvent.priceRanges[0].min }} to
+            <span class="event-subtitle">Prices from</span>
+            {{ relatedEvent.priceRanges[0].min }} to
             {{ relatedEvent.priceRanges[0].max }}
             {{ relatedEvent.priceRanges[0].currency }}
           </p>
           <p>
-            <a class="details-btn" v-if="relatedEvent.url" :href="relatedEvent.url" target="_blank">Get tickets</a>
+            <a
+              class="details-btn"
+              v-if="relatedEvent.url"
+              :href="relatedEvent.url"
+              target="_blank"
+              >Get tickets</a
+            >
           </p>
           <p>
             <a
@@ -96,7 +122,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import axios from "axios";
 
 //Crette event type interface
@@ -133,7 +159,7 @@ type Response = {
 export default class Home extends Vue {
   //Set props
   @Prop() private eventId!: string;
-//  @Prop({ type: Object as () => EventStructure })
+  //  @Prop({ type: Object as () => EventStructure })
   //public eventItem!: EventStructure;
   //Set the innitial state
   private relatedEvents: Array<EventStructure> = [];
@@ -161,7 +187,7 @@ export default class Home extends Vue {
   }
   //Perssist event entity after page refresh
   get event() {
-    if(this.$attrs.event) {
+    if (this.$attrs.event) {
       return this.$attrs.event;
     } else {
       return this.$store.state.localEvent;

@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentCategorie: '',
-    localEvent: JSON.parse(localStorage.getItem('currentEvent') || '')
+    currentCategorie: "",
+    localEvent: JSON.parse(localStorage.getItem("currentEvent") || "")
   },
   mutations: {
     updateCategorie(state, newCategorie) {
-      state.currentCategorie = newCategorie
+      state.currentCategorie = newCategorie;
     }
   },
   actions: {},

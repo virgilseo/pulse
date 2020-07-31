@@ -2,8 +2,8 @@
   <div class="home">
     <h3>Amsterdam Events</h3>
     <section v-if="loading">
-      <div class='loader-container'>
-        <div class='loader'></div>
+      <div class="loader-container">
+        <div class="loader"></div>
       </div>
     </section>
     <section v-else-if="error">
@@ -11,8 +11,13 @@
     </section>
     <section class="events-container" v-else>
       <label class="sort" for="sort">Sort </label>
-      <select class="sort-events" name="sort" @change="sortEvents" v-model="sortOption">
-        <option value="" disabled >by</option>
+      <select
+        class="sort-events"
+        name="sort"
+        @change="sortEvents"
+        v-model="sortOption"
+      >
+        <option value="" disabled>by</option>
         <option value="name.asc">name.asc</option>
         <option value="name.desc">name.desc</option>
         <option value="date.asc">date.asc</option>
@@ -28,15 +33,18 @@
             :alt="eventItem.name"
           />
           <p v-if="eventItem.classifications">
-            <span class="event-subtitle">Categorie</span> {{ eventItem.classifications[0].segment.name }}
+            <span class="event-subtitle">Categorie</span>
+            {{ eventItem.classifications[0].segment.name }}
           </p>
           <p v-if="eventItem.dates.start">
-            <span class="event-subtitle">When</span> {{ eventItem.dates.start.localTime }}
+            <span class="event-subtitle">When</span>
+            {{ eventItem.dates.start.localTime }}
             {{ eventItem.dates.start.localDate }}
           </p>
           <p v-if="eventItem._embedded.venues[0].address">
-            <span class="event-subtitle">Where</span> {{ eventItem._embedded.venues[0].address.line1 }},
-             {{ eventItem._embedded.venues[0].city.name }}
+            <span class="event-subtitle">Where</span>
+            {{ eventItem._embedded.venues[0].address.line1 }},
+            {{ eventItem._embedded.venues[0].city.name }}
           </p>
           <router-link
             class="details-btn"
@@ -60,7 +68,7 @@ import axios from "axios";
 //Create event type interface
 type start = {
   localDate: string;
-}
+};
 type dates = {
   start: start;
 };
@@ -92,7 +100,7 @@ export default class Home extends Vue {
   private events: Array<EventStructure> = [];
   private loading = false;
   private error = false;
-  private sortOption = '';
+  private sortOption = "";
 
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
@@ -116,75 +124,79 @@ export default class Home extends Vue {
       });
   }
   //Sort events by date and name (acending and descending)
-  private sortEvents() : void {
-    switch(this.sortOption) {
-      case "name.asc": {
-      const byName = this.events.slice(0);
-      byName.sort(function(a,b) {
-      	const x = a.name.toLowerCase();
-	      const y = b.name.toLowerCase();
-	      return x < y ? -1 : x > y ? 1 : 0;
-      });
-      this.events = byName;
-      }
-      break;
-      case "name.desc": {
-      const byName = this.events.slice(0);
-      byName.sort(function(a,b) {
-      	const x = a.name.toLowerCase();
-	      const y = b.name.toLowerCase();
-	      return x > y ? -1 : x > y ? 1 : 0;
-      });
-      this.events = byName;
-      }
-      break;
-      case "date.asc": {
-        const byDate = this.events.slice(0);
-        byDate.sort(function(a,b) {
-          const x = Date.parse(a.dates.start.localDate);
-          const y = Date.parse(b.dates.start.localDate);
-          return x - y;
-        });
-      this.events = byDate;
-      }
-      break;
+  private sortEvents(): void {
+    switch (this.sortOption) {
+      case "name.asc":
+        {
+          const byName = this.events.slice(0);
+          byName.sort(function(a, b) {
+            const x = a.name.toLowerCase();
+            const y = b.name.toLowerCase();
+            return x < y ? -1 : x > y ? 1 : 0;
+          });
+          this.events = byName;
+        }
+        break;
+      case "name.desc":
+        {
+          const byName = this.events.slice(0);
+          byName.sort(function(a, b) {
+            const x = a.name.toLowerCase();
+            const y = b.name.toLowerCase();
+            return x > y ? -1 : x > y ? 1 : 0;
+          });
+          this.events = byName;
+        }
+        break;
+      case "date.asc":
+        {
+          const byDate = this.events.slice(0);
+          byDate.sort(function(a, b) {
+            const x = Date.parse(a.dates.start.localDate);
+            const y = Date.parse(b.dates.start.localDate);
+            return x - y;
+          });
+          this.events = byDate;
+        }
+        break;
       case "date.desc": {
         const byDate = this.events.slice(0);
-        byDate.sort(function(a,b) {
+        byDate.sort(function(a, b) {
           const x = Date.parse(a.dates.start.localDate);
           const y = Date.parse(b.dates.start.localDate);
           return x > y ? -1 : x > y ? 1 : 0;
         });
-      this.events = byDate;
+        this.events = byDate;
       }
     }
   }
   //Get current categorie selection form the vuex store
   get currentCategorie() {
-    return this.$store.state.currentCategorie
+    return this.$store.state.currentCategorie;
   }
   //Save current event in local localStorage
   private saveEvent(eventItem: object): void {
-    localStorage.setItem('currentEvent', JSON.stringify(eventItem));
+    localStorage.setItem("currentEvent", JSON.stringify(eventItem));
   }
   //Set up watcher for the the computed(the current categorie selected by the user) property
-  @Watch('currentCategorie')
+  @Watch("currentCategorie")
   categorieChanged(newVal: string): void {
     this.loading = true;
     //Request events based on the categorie selected by the user(music, art & theatre, etc.)
-    axios.get(
-      `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${newVal}`
-    )
-    .then((response: Response) => {
-      this.events = response.data._embedded.events;
-    })
-    .catch((error: Error) => {
-      console.log(error);
-      this.error = true
-    })
-    .finally((): void => {
-      this.loading = false
-    })
+    axios
+      .get(
+        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${newVal}`
+      )
+      .then((response: Response) => {
+        this.events = response.data._embedded.events;
+      })
+      .catch((error: Error) => {
+        console.log(error);
+        this.error = true;
+      })
+      .finally((): void => {
+        this.loading = false;
+      });
   }
 }
 </script>
