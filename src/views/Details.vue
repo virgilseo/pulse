@@ -190,7 +190,7 @@ export default class Home extends Vue {
     if (this.$attrs.event) {
       return this.$attrs.event;
     } else {
-      return this.$store.state.localEvent;
+      return JSON.parse(localStorage.getItem("currentEvent") || "");
     }
   }
 }

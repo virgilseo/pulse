@@ -5,8 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentCategorie: "",
-    localEvent: JSON.parse(localStorage.getItem("currentEvent") || "")
+    currentCategorie: ""
   },
   mutations: {
     updateCategorie(state, newCategorie) {
