@@ -18,10 +18,10 @@
         v-model="sortOption"
       >
         <option value="" disabled>by</option>
-        <option value="name.asc">name.asc</option>
-        <option value="name.desc">name.desc</option>
-        <option value="date.asc">date.asc</option>
-        <option value="date.desc">date.desc</option>
+        <option value="name.asc">name A to Z</option>
+        <option value="name.desc">name Z to A</option>
+        <option value="date.asc">happening Sooner</option>
+        <option value="date.desc">happening Later</option>
       </select>
       <ul class="event-list">
         <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
