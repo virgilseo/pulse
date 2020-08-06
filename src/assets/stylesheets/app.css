@@ -58,6 +58,23 @@ a {
   font-style: oblique;
 }
 
+.error-message {
+  background: #fff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 8px 14px;
+  width: fit-content;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 10px;
+  color: #F6AD55;
+  font-size: 1.8em;
+}
+
 /*Navigation*/
 
 #nav {
@@ -118,6 +135,10 @@ a {
   background-color: #fff;
   color: #F6AD55;
   transition: 0.2s;
+}
+
+.error-container {
+  height: 60vh;
 }
 
 /*Details*/

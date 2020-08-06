@@ -32,6 +32,12 @@
   }
 }
 
+@media only screen and (min-width: 700px) {
+  .error-container {
+    height: 70vh;
+  }
+}
+
 @media only screen and (min-width: 850px) {
   .home, .randomizer, .details-page, .inner-header, .footer, .inner-nav {
     width: 850px;
@@ -41,5 +47,16 @@
   .header-container, #nav {
     padding-left: 0;
   }
+}
 
+@media only screen and (min-width: 1000px) {
+  .error-container {
+    height: 78vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .error-container {
+    height: 65vh;
+  }
 }

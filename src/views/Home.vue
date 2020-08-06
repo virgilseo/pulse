@@ -6,8 +6,10 @@
         <div class="loader"></div>
       </div>
     </section>
-    <section v-else-if="error">
-      <p>Something went wrong. Please try again later</p>
+    <section  class="error-container" v-else-if="error">
+      <p class="error-message">
+        <i class="material-icons error-icon">error</i>
+        Something went wrong</p>
     </section>
     <section class="events-container" v-else>
       <label class="sort" for="sort">Sort </label>

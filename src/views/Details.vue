@@ -84,7 +84,9 @@
         <p>Loading...</p>
       </section>
       <section v-if="error">
-        <p>Something went wrong. Please try again later</p>
+        <p class="error-message">
+          <i class="material-icons error-icon">error</i>
+          Something went wrong</p>
       </section>
       <ul class="related-list">
         <li
