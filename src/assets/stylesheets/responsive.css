@@ -14,6 +14,22 @@
     display: flex;
     justify-content: space-around;
   }
+
+  .related-event {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 50px;
+  }
+
+  .text-container {
+    width: 40%;
+  }
+
+  .event-details {
+    width: 60%;
+  }
 }
 
 @media only screen and (min-width: 850px) {

@@ -5,8 +5,8 @@
         <i class="material-icons back-icon">
           arrow_back
         </i>
-        Back to events
       </router-link>
+        <span class="back-title">Back to events</span>
     </div>
     <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
@@ -67,7 +67,7 @@
           >Get tickets</a
         >
       </p>
-      <p>
+      <p class="seat-link">
         <a
           class="details-btn"
           v-if="event.seatmap"
@@ -88,39 +88,40 @@
       </section>
       <ul class="related-list">
         <li
-          class="event-item"
+          class="event-item related-event"
           v-for="relatedEvent in relatedEvents"
           :key="relatedEvent.id"
         >
-          <h1>{{ relatedEvent.name }}</h1>
           <img
             v-if="relatedEvent.images"
             :src="relatedEvent.images[0].url"
             :alt="relatedEvent.name"
           />
-          <p v-if="relatedEvent.dates">
-            <span class="event-subtitle">When</span>
-            {{ relatedEvent.dates.start.localTime }} -
-            {{ relatedEvent.dates.start.localDate }}
-          </p>
-          <section v-if="relatedEvent._embedded">
-            <span class="event-subtitle">Where </span>
-            <slot v-if="relatedEvent._embedded.venues[0].name"
-              >{{ relatedEvent._embedded.venues[0].name }},
-            </slot>
-            <slot v-if="relatedEvent._embedded.venues[0].address"
-              >{{ relatedEvent._embedded.venues[0].address.line1 }}
-            </slot>
-            <slot v-if="relatedEvent._embedded.venues[0].city.name">{{
-              relatedEvent._embedded.venues[0].city.name
-            }}</slot>
-          </section>
-          <p v-if="relatedEvent.priceRanges">
-            <span class="event-subtitle">Prices from</span>
-            {{ relatedEvent.priceRanges[0].min }} to
-            {{ relatedEvent.priceRanges[0].max }}
-            {{ relatedEvent.priceRanges[0].currency }}
-          </p>
+          <div class="text-container">
+            <h3>{{ relatedEvent.name }}</h3>
+            <p v-if="relatedEvent.dates">
+              <span class="event-subtitle">When</span>
+              {{ new Date(relatedEvent.dates.start.localDate).toDateString() }}
+            </p>
+            <section v-if="relatedEvent._embedded">
+              <span class="event-subtitle">Where </span>
+              <slot v-if="relatedEvent._embedded.venues[0].name"
+                >{{ relatedEvent._embedded.venues[0].name }},
+              </slot>
+              <slot v-if="relatedEvent._embedded.venues[0].address"
+                >{{ relatedEvent._embedded.venues[0].address.line1 }}
+              </slot>
+              <slot v-if="relatedEvent._embedded.venues[0].city.name">{{
+                relatedEvent._embedded.venues[0].city.name
+              }}</slot>
+            </section>
+            <p v-if="relatedEvent.priceRanges">
+              <span class="event-subtitle">Prices from</span>
+              {{ relatedEvent.priceRanges[0].min }} to
+              {{ relatedEvent.priceRanges[0].max }}
+              {{ relatedEvent.priceRanges[0].currency }}
+            </p>
+          </div>
           <p>
             <a
               class="details-btn"
@@ -130,16 +131,6 @@
               >Get tickets</a
             >
           </p>
-          <p>
-            <a
-              class="details-btn"
-              v-if="relatedEvent.seatmap"
-              :href="relatedEvent.seatmap.staticUrl"
-              target="_blank"
-              >Check out the seat map</a
-            >
-          </p>
-          <p />
         </li>
       </ul>
     </section>

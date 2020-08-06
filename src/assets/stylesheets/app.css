@@ -124,34 +124,40 @@ a {
 /*Details*/
 
 .link-container {
+  display: flex;
+  align-items: center;
   padding: 20px 0px;
 }
 
-.back-link {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  border: 2px solid #F6AD55;
-  background-color: #F6AD55;
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-weight: 600;
-  width: fit-content;
-}
 
-.back-link:hover {
-  background-color: #fff;
+
+.back-icon {
+  margin-right: 7px;
+  font-size: 1.8em;
   color: #F6AD55;
+  border-radius: 50%;
+  padding: 4px;
+}
+.back-icon:hover {
+  background: #F6AD55;
+  color: #fff;
   transition: 0.2s;
 }
 
-.back-icon {
-  margin-right: 10px;
-  font-size: 1.6em;
+.back-title {
+  font-weight: 600;
 }
 
 .event-subtitle {
   margin-right: 3px;
+}
+
+.seat-link {
+  margin-top: 20px;
+}
+
+.related-events {
+  padding: 50px 0px;
 }
 
 /*Randomizer*/
