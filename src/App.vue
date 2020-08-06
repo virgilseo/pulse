@@ -62,7 +62,8 @@ export default class App extends Vue {
   }
   private scrollTop(): void {
     window.scrollTo({
-      top: 0
+      top: 0,
+      behavior:'smooth'
     });
   }
 }
