@@ -150,6 +150,10 @@ a {
   font-size: 1.6em;
 }
 
+.event-subtitle {
+  margin-right: 3px;
+}
+
 /*Randomizer*/
 
 .event-container {

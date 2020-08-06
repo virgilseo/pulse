@@ -11,13 +11,16 @@
     <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
       <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
-      <p v-if="event.dates">
-        <span class="event-subtitle">When</span>
-        {{ event.dates.start.localTime }}
-        {{ event.dates.start.localDate }}
+      <p v-if="event.dates.start.dateTime">
+        <span class="event-subtitle">Time </span>
+        {{ new Date(event.dates.start.dateTime).toLocaleTimeString() }}
+      </p>
+      <p v-if="event.dates.start.localDate">
+        <span class="event-subtitle">Date </span>
+        {{ new Date(event.dates.start.localDate).toDateString() }}
       </p>
       <section v-if="event._embedded">
-        <span class="event-subtitle">Where </span>
+        <span class="event-subtitle">Venue </span>
         <slot v-if="event._embedded.venues[0].name"
           >{{ event._embedded.venues[0].name }},
         </slot>
@@ -32,6 +35,28 @@
         <span class="event-subtitle">Prices from</span>
         {{ event.priceRanges[0].min }} to {{ event.priceRanges[0].max }}
         {{ event.priceRanges[0].currency }}
+      </p>
+      <p v-if="event.promoter">
+        <span class="event-subtitle">Promoter </span>
+        {{event.promoter.name}}
+      </p>
+      <section v-if="event.sales">
+        <p v-if="event.sales.public.startDateTime">
+          <span class="event-subtitle">Ticket sales start on </span>
+          {{ new Date(event.sales.public.startDateTime).toDateString() }}
+        </p>
+        <p v-if="event.sales.public.endDateTime">
+          <span class="event-subtitle">Ticket sales end on </span>
+          {{ new Date(event.sales.public.endDateTime).toDateString() }}
+        </p>
+      </section>
+      <p v-if="event.classifications[0].genre">
+        <span class="event-subtitle">Genre </span>
+        {{ event.classifications[0].genre.name }}
+      </p>
+      <p v-if="event.classifications[0].segment">
+        <span class="event-subtitle">Type </span>
+        {{ event.classifications[0].segment.name }}
       </p>
       <p>
         <a
