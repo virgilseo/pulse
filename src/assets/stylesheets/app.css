@@ -283,6 +283,39 @@ a {
 }
 
 .scroll-container:hover {
-
   cursor: pointer;
+}
+
+/*Select dropdown*/
+
+.sort-events {
+  padding: 2px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  color: #718096;
+  font-family: 'Mukta', sans-serif;
+  font-size: 0.9em;
+  border: 2px solid transparent;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.sort-events:focus {
+  outline: none;
+  border: 2px solid #F6AD55;
+}
+
+.sort-events option {
+  font-weight: 600;
+  color: #718096;
+}
+
+.sort-events::selection {
+  color: red;
+}
+
+.sort {
+  font-size: 1.1em;
+  margin-right: 5px;
 }
