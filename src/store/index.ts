@@ -1,17 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import {home} from "./home.module";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    currentCategorie: ""
-  },
-  mutations: {
-    updateCategorie(state, newCategorie) {
-      state.currentCategorie = newCategorie;
-    }
-  },
+  state: {},
+  mutations:{},
   actions: {},
-  modules: {}
+  modules: {
+   home: home
+  }
 });

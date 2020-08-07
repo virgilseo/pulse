@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
-import axios from "axios";
+import { mapGetters } from "vuex";
 
 //Create event type interface
 type start = {
@@ -96,34 +96,25 @@ type Response = {
   data: Embedded;
 };
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters({
+      loading: "loading",
+      error: "error",
+      events: "events",
+      categorie: "categorie"
+    })
+  }
+})
 export default class Home extends Vue {
   //Set the intial data state
-  private events: Array<EventStructure> = [];
-  private loading = false;
-  private error = false;
-  private sortOption = "";
+   private sortOption = "";
 
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
   mounted() {
-    //Display loader while fetching the events data from the api
-    this.loading = true;
-
-    axios
-      .get(
-        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random`
-      )
-      .then((response: Response) => {
-        this.events = response.data._embedded.events;
-      })
-      .catch((error: Error) => {
-        this.error = true;
-        console.log(error);
-      })
-      .finally((): void => {
-        this.loading = false;
-      });
+    //Dispatch get request for 10 events from the tickemaster api
+    this.$store.dispatch("getEvents");
   }
   //Sort events by date and name (acending and descending)
   private sortEvents(): void {
@@ -136,7 +127,7 @@ export default class Home extends Vue {
             const y = b.name.toLowerCase();
             return x < y ? -1 : x > y ? 1 : 0;
           });
-          this.events = byName;
+          this.$store.commit("sortEvents", byName);
         }
         break;
       case "name.desc":
@@ -147,7 +138,7 @@ export default class Home extends Vue {
             const y = b.name.toLowerCase();
             return x > y ? -1 : x > y ? 1 : 0;
           });
-          this.events = byName;
+          this.$store.commit("sortEvents", byName);
         }
         break;
       case "date.asc":
@@ -158,7 +149,7 @@ export default class Home extends Vue {
             const y = Date.parse(b.dates.start.localDate);
             return x - y;
           });
-          this.events = byDate;
+          this.$store.commit("sortEvents", byDate);
         }
         break;
       case "date.desc": {
@@ -168,37 +159,22 @@ export default class Home extends Vue {
           const y = Date.parse(b.dates.start.localDate);
           return x > y ? -1 : x > y ? 1 : 0;
         });
-        this.events = byDate;
+        this.$store.commit("sortEvents", byDate);
       }
     }
-  }
-  //Get current categorie selection form the vuex store
-  get currentCategorie() {
-    return this.$store.state.currentCategorie;
   }
   //Save current event in local localStorage
   private saveEvent(eventItem: object): void {
     localStorage.setItem("currentEvent", JSON.stringify(eventItem));
   }
-  //Set up watcher for the the computed(the current categorie selected by the user) property
-  @Watch("currentCategorie")
-  categorieChanged(newVal: string): void {
-    this.loading = true;
-    //Request events based on the categorie selected by the user(music, art & theatre, etc.)
-    axios
-      .get(
-        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${newVal}`
-      )
-      .then((response: Response) => {
-        this.events = response.data._embedded.events;
-      })
-      .catch((error: Error) => {
-        console.log(error);
-        this.error = true;
-      })
-      .finally((): void => {
-        this.loading = false;
-      });
+  //Set up watcher for the the getter(the current categorie selected
+  //by the user) and dispatch the api call for new events categorie
+  //when the getter changes
+  @Watch("categorie")
+  categorieChanged(): void {
+    this.$store.dispatch("getEvents");
+    //Reset sort option
+    this.sortOption = "";
   }
 }
 </script>

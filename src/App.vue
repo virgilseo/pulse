@@ -13,8 +13,7 @@
             @change="changeCategorie"
             v-model="categorie"
           >
-            <option value="" disabled>select</option>
-            <option value="music">music</option>
+            <option  value="music" selected="selected">music</option>
             <option value="Arts & Theatre">arts and theatre</option>
             <option value="Miscellaneous">other</option>
           </select>
@@ -41,7 +40,7 @@ import ScrollButton from "./components/ScrollButton.vue";
 })
 export default class App extends Vue {
   //Set the initial data state
-  private categorie = "";
+  private categorie = "music";
   private scroll = false;
   //Update global state variable with the current categorie selection
   private changeCategorie(): void {

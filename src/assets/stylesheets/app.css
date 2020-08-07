@@ -311,10 +311,6 @@ a {
   color: #718096;
 }
 
-.sort-events::selection {
-  color: red;
-}
-
 .sort {
   font-size: 1.1em;
   margin-right: 5px;
