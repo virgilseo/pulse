@@ -18,6 +18,7 @@
             <option value="Miscellaneous">other</option>
           </select>
         </div>
+        <Categories />
       </div>
     </div>
     <router-view />
@@ -30,12 +31,14 @@ import { Component, Vue } from "vue-property-decorator";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import ScrollButton from "./components/ScrollButton.vue";
+import Categories from "./components/Categories.vue";
 
 @Component({
   components: {
     Header,
     Footer,
-    ScrollButton
+    ScrollButton,
+    Categories
   }
 })
 export default class App extends Vue {
