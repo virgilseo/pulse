@@ -142,6 +142,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 //Crette event type interface
 type Venue = {
@@ -173,35 +174,25 @@ type Response = {
   data: Embedded;
 };
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters({
+      loading: "related/loading",
+      error: "related/error",
+      relatedEvents: "related/events"
+    })
+  }
+})
 export default class Home extends Vue {
   //Set props
   @Prop() private eventId!: string;
-  //  @Prop({ type: Object as () => EventStructure })
-  //public eventItem!: EventStructure;
-  //Set the innitial state
-  private relatedEvents: Array<EventStructure> = [];
-  private loading = false;
-  private error = false;
 
   //Get 3 related events form the api after the component mounts
   mounted() {
-    //Display loader while fetching the events data from the api
-    this.loading = true;
-    axios
-      .get(
-        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&page=1&size=3&sort=random&venueId=${this.event._embedded.venues[0].id}`
-      )
-      .then((response: Response) => {
-        this.relatedEvents = response.data._embedded.events;
-      })
-      .catch((error: Error) => {
-        this.error = true;
-        console.log(error);
-      })
-      .finally((): void => {
-        this.loading = false;
-      });
+    //Save venue id to global state
+    this.$store.commit("related/saveVenueId", this.event._embedded.venues[0].id);
+
+    this.$store.dispatch("related/getEvents");
   }
   //Perssist event entity after page refresh
   get event() {

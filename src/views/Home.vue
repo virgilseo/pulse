@@ -163,7 +163,7 @@ export default class Home extends Vue {
       }
     }
   }
-  //Save current event in local localStorage
+  //Save current event and venue id in local localStorage
   private saveEvent(eventItem: object): void {
     localStorage.setItem("currentEvent", JSON.stringify(eventItem));
   }
