@@ -44,7 +44,7 @@ export default class App extends Vue {
   private scroll = false;
   //Update global state variable with the current categorie selection
   private changeCategorie(): void {
-    this.$store.commit("updateCategorie", this.categorie);
+    this.$store.commit("home/updateCategorie", this.categorie);
   }
   get currentPage(): string {
     return this.$route.name || "";

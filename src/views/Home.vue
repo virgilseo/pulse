@@ -99,10 +99,10 @@ type Response = {
 @Component({
   computed: {
     ...mapGetters({
-      loading: "loading",
-      error: "error",
-      events: "events",
-      categorie: "categorie"
+      loading: "home/loading",
+      error: "home/error",
+      events: "home/events",
+      categorie: "home/categorie"
     })
   }
 })
@@ -114,7 +114,7 @@ export default class Home extends Vue {
   //to ticket master api after the component mounts
   mounted() {
     //Dispatch get request for 10 events from the tickemaster api
-    this.$store.dispatch("getEvents");
+    this.$store.dispatch("home/getEvents");
   }
   //Sort events by date and name (acending and descending)
   private sortEvents(): void {
@@ -127,7 +127,7 @@ export default class Home extends Vue {
             const y = b.name.toLowerCase();
             return x < y ? -1 : x > y ? 1 : 0;
           });
-          this.$store.commit("sortEvents", byName);
+          this.$store.commit("home/sortEvents", byName);
         }
         break;
       case "name.desc":
@@ -138,7 +138,7 @@ export default class Home extends Vue {
             const y = b.name.toLowerCase();
             return x > y ? -1 : x > y ? 1 : 0;
           });
-          this.$store.commit("sortEvents", byName);
+          this.$store.commit("home/sortEvents", byName);
         }
         break;
       case "date.asc":
@@ -149,7 +149,7 @@ export default class Home extends Vue {
             const y = Date.parse(b.dates.start.localDate);
             return x - y;
           });
-          this.$store.commit("sortEvents", byDate);
+          this.$store.commit("home/sortEvents", byDate);
         }
         break;
       case "date.desc": {
@@ -159,7 +159,7 @@ export default class Home extends Vue {
           const y = Date.parse(b.dates.start.localDate);
           return x > y ? -1 : x > y ? 1 : 0;
         });
-        this.$store.commit("sortEvents", byDate);
+        this.$store.commit("home/sortEvents", byDate);
       }
     }
   }
@@ -172,7 +172,7 @@ export default class Home extends Vue {
   //when the getter changes
   @Watch("categorie")
   categorieChanged(): void {
-    this.$store.dispatch("getEvents");
+    this.$store.dispatch("home/getEvents");
     //Reset sort option
     this.sortOption = "";
   }

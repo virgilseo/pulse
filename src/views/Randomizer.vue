@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import axios from "axios";
+import { mapGetters } from "vuex";
 
 //Create event interface
 type EventStructure = {
@@ -71,64 +71,24 @@ type Embedded = {
 type Response = {
   data: Embedded;
 };
-@Component
+@Component({
+  computed: {
+    ...mapGetters({
+      loading: "randomizer/loading",
+      error: "randomizer/error",
+      event: "randomizer/event"
+    })
+  }
+})
 export default class Randomizer extends Vue {
-  //Set the intial state
-  private event: object = {};
-  private loading = false;
-  private error = false;
 
   mounted() {
     //Display random event on page load
-    this.randomize();
+    this.$store.dispatch("randomizer/randomize");
   }
   public randomize(): void {
-    const sortTerms = [
-      "name,asc",
-      "name,desc",
-      "date,asc",
-      "date,desc",
-      "relevance,asc",
-      "relevance,desc",
-      "name,date,asc",
-      "name,date,desc",
-      "date,name,asc",
-      "date,name,desc",
-      "onSaleStartDate,asc",
-      "id,asc",
-      "venueName,asc",
-      "venueName,desc",
-      "random"
-    ];
-    const sortItem = sortTerms[(sortTerms.length * Math.random()) | 0];
-
-    const classTerms = [
-      "Music",
-      "Miscellaneous",
-      "Arts & Theatre",
-      "Electronic",
-      "Hip Hop",
-      "Metal",
-      "Jazz"
-    ];
-    const classItem = classTerms[(classTerms.length * Math.random()) | 0];
-
-    this.loading = true;
-
-    axios
-      .get(
-        `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=1&sort=${sortItem}&classificationName=${classItem}`
-      )
-      .then((response: Response) => {
-        this.event = response.data._embedded.events[0];
-      })
-      .catch((error: Error) => {
-        this.error = true;
-        console.log(error);
-      })
-      .finally((): void => {
-        this.loading = false;
-      });
+     //Display random event on user input
+    this.$store.dispatch("randomizer/randomize");
   }
 }
 </script>

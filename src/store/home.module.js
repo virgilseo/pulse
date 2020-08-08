@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const home = {
+  namespaced: true,
   state: () => ({
     loading: false,
     error: false,
@@ -44,7 +45,7 @@ export const home = {
       commit("onLoad", true);
       axios
         .get(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${this.getters.categorie}`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${this.getters["home/categorie"]}`
         )
         .then(response => {
           commit("onSuccess", response.data._embedded.events);
