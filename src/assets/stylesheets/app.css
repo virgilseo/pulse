@@ -118,10 +118,6 @@ a {
   margin-bottom: 15px;
 }
 
-.categories-label {
-  font-weight: 600;
-}
-
 .details-btn, .randomize-btn {
   color: #fff;
   border: 2px solid #F6AD55;
@@ -314,4 +310,47 @@ a {
 .sort {
   font-size: 1.1em;
   margin-right: 5px;
+}
+
+/*Categories*/
+
+.menu-container {
+  display: flex;
+}
+
+.categories-label {
+  font-weight: 600;
+}
+
+.dropdown-icon {
+  color: #fff;
+  margin-left: 5px;
+}
+
+.dropdown-icon:hover {
+  cursor: pointer;
+}
+
+.categorie-dropdown {
+  position: absolute;
+  margin-top: 10px;
+  padding: 12px 0px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  width: 160px;
+}
+
+.categorie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 18px;
+}
+
+.categorie:hover {
+  background: #F6AD55;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #fff;
 }
