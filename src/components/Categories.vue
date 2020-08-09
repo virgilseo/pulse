@@ -21,11 +21,17 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
+//Add categorie type interface
+type Categorie = {
+  name: string;
+  isSelected: boolean;
+};
+
 @Component
 export default class Categories extends Vue {
   //Set the initail state
   private showCategories = false;
-  private categories: Array<object> = [
+  private categories: Array<Categorie> = [
     { name: "music", isSelected: true },
     { name: "arts & theatre", isSelected: false },
     { name: "miscellaneous", isSelected: false },
@@ -48,7 +54,7 @@ export default class Categories extends Vue {
     this.showCategories ? this.showCategories = false : this.showCategories = true;
   }
   //Change categories on user input
-  private changeCategorie(categorie: object): void {
+  private changeCategorie(categorie: Categorie): void {
     this.categories.forEach(item => {
       item.isSelected = false
     });
