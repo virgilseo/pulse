@@ -1,17 +1,22 @@
 <template>
   <div class="sort-container">
-    <div class="sort-menu">
-      <span>Sort</span>
-      <i @click="toggleSort" class="material-icons">expand_more</i>
+    <div @click="toggleSort" class="sort-menu">
+      <span class="sort-label">Sort by</span>
+      <i class="material-icons expand-icon">
+        <span v-if="!showSort">expand_more</span>
+        <span v-if="showSort">expand_less</span>
+      </i>
     </div>
     <div v-if="showSort" class="sort-items">
       <ul>
         <li
+          class="sort-item"
           @click="sortEvents(option)"
           v-for="option in sortOptions"
           :key="option.index"
         >
           <span>{{ option.name }}</span>
+          <i v-if="option.isSelected" class="material-icons check-icon">check</i>
         </li>
       </ul>
     </div>
@@ -90,6 +95,12 @@ export default class SortEvents extends Vue {
     this.$store.commit("home/sortEvents", byDate);
   }
   private sortEvents(option: Sort): void {
+    //Display checked icon on sort option after selection
+    this.sortOptions.forEach(item => {
+      item.isSelected = false;
+    });
+    option.isSelected = true;
+
     if (option.type === "name") {
       this.sortByName(option);
     } else {

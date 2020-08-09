@@ -36,6 +36,10 @@
   .error-container {
     height: 70vh;
   }
+
+  .categorie-dropdown {
+    width: 180px;
+  }
 }
 
 @media only screen and (min-width: 850px) {
