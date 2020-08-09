@@ -12,19 +12,7 @@
         Something went wrong</p>
     </section>
     <section class="events-container" v-else>
-      <label class="sort" for="sort">Sort </label>
-      <select
-        class="sort-events"
-        name="sort"
-        @change="sortEvents"
-        v-model="sortOption"
-      >
-        <option value="" disabled>by</option>
-        <option value="name.asc">name A to Z</option>
-        <option value="name.desc">name Z to A</option>
-        <option value="date.asc">happening Sooner</option>
-        <option value="date.desc">happening Later</option>
-      </select>
+      <SortEvents :events="this.events" />
       <ul class="event-list">
         <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
           <h3>{{ eventItem.name }}</h3>
@@ -66,6 +54,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
+import SortEvents from "../components/SortEvents.vue";
 
 //Create event type interface
 type start = {
@@ -97,6 +86,9 @@ type Response = {
 };
 
 @Component({
+  components: {
+    SortEvents
+  },
   computed: {
     ...mapGetters({
       loading: "home/loading",
@@ -107,61 +99,11 @@ type Response = {
   }
 })
 export default class Home extends Vue {
-  //Set the intial data state
-   private sortOption = "";
-
   //Make get request for 10 events in Amsterdam
   //to ticket master api after the component mounts
   mounted() {
     //Dispatch get request for 10 events from the tickemaster api
     this.$store.dispatch("home/getEvents");
-  }
-  //Sort events by date and name (acending and descending)
-  private sortEvents(): void {
-    switch (this.sortOption) {
-      case "name.asc":
-        {
-          const byName = this.events.slice(0);
-          byName.sort(function(a, b) {
-            const x = a.name.toLowerCase();
-            const y = b.name.toLowerCase();
-            return x < y ? -1 : x > y ? 1 : 0;
-          });
-          this.$store.commit("home/sortEvents", byName);
-        }
-        break;
-      case "name.desc":
-        {
-          const byName = this.events.slice(0);
-          byName.sort(function(a, b) {
-            const x = a.name.toLowerCase();
-            const y = b.name.toLowerCase();
-            return x > y ? -1 : x > y ? 1 : 0;
-          });
-          this.$store.commit("home/sortEvents", byName);
-        }
-        break;
-      case "date.asc":
-        {
-          const byDate = this.events.slice(0);
-          byDate.sort(function(a, b) {
-            const x = Date.parse(a.dates.start.localDate);
-            const y = Date.parse(b.dates.start.localDate);
-            return x - y;
-          });
-          this.$store.commit("home/sortEvents", byDate);
-        }
-        break;
-      case "date.desc": {
-        const byDate = this.events.slice(0);
-        byDate.sort(function(a, b) {
-          const x = Date.parse(a.dates.start.localDate);
-          const y = Date.parse(b.dates.start.localDate);
-          return x > y ? -1 : x > y ? 1 : 0;
-        });
-        this.$store.commit("home/sortEvents", byDate);
-      }
-    }
   }
   //Save current event and venue id in local localStorage
   private saveEvent(eventItem: object): void {
@@ -173,8 +115,6 @@ export default class Home extends Vue {
   @Watch("categorie")
   categorieChanged(): void {
     this.$store.dispatch("home/getEvents");
-    //Reset sort option
-    this.sortOption = "";
   }
 }
 </script>
