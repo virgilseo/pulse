@@ -177,9 +177,9 @@ type Response = {
 @Component({
   computed: {
     ...mapGetters({
-      loading: "related/loading",
-      error: "related/error",
-      relatedEvents: "related/events"
+      loading: "related/getLoading",
+      error: "related/getError",
+      relatedEvents: "related/getItems"
     })
   }
 })
