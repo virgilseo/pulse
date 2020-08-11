@@ -9,21 +9,20 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
 li {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+
 ul{
   margin: 0;
   padding: 0;
 }
+
 img {
   max-width: 100%;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  align-self: center;
 }
 
 a {
@@ -136,6 +135,21 @@ a {
 .error-container {
   height: 60vh;
 }
+
+.image-container {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.event-image {
+  object-fit: cover;
+  height: 100%;
+  width: auto;
+  border-radius: 50%;
+}
+
+
 
 /*Details*/
 

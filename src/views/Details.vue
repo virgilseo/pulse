@@ -10,7 +10,14 @@
     </div>
     <div class="event-item event-details">
       <h1>{{ event.name }}</h1>
-      <img v-if="event.images" :src="event.images[0].url" :alt="event.name" />
+      <div class="image-container">
+        <img
+          class="event-image"
+          v-if="event.images"
+          :src="filterImages(event.images)"
+          :alt="event.name"
+        />
+      </div>
       <p v-if="event.dates.start.dateTime">
         <span class="event-subtitle">Time </span>
         {{ new Date(event.dates.start.dateTime).toLocaleTimeString() }}
@@ -83,22 +90,25 @@
       <section v-if="loading">
         <p>Loading...</p>
       </section>
-      <section v-if="error">
+      <section v-else-if="error">
         <p class="error-message">
           <i class="material-icons error-icon">error</i>
           Something went wrong</p>
       </section>
-      <ul class="related-list">
+      <ul v-else class="related-list">
         <li
           class="event-item related-event"
           v-for="relatedEvent in relatedEvents"
           :key="relatedEvent.id"
         >
-          <img
-            v-if="relatedEvent.images"
-            :src="relatedEvent.images[0].url"
-            :alt="relatedEvent.name"
-          />
+          <div class="image-container">
+            <img
+              class="event-image"
+              v-if="relatedEvent.images"
+              :src="filterImages(relatedEvent.images)"
+              :alt="relatedEvent.name"
+            />
+          </div>
           <div class="text-container">
             <h3>{{ relatedEvent.name }}</h3>
             <p v-if="relatedEvent.dates">
@@ -201,6 +211,13 @@ export default class Home extends Vue {
     } else {
       return JSON.parse(localStorage.getItem("currentEvent") || "");
     }
+  }
+  //Filter images from the api and get back
+  //a image with a height bigger than 200px
+  private filterImages(images: object): object {
+    const filteredImages = images.filter((image: object) => image.height > 200);
+
+    return filteredImages[0].url;
   }
 }
 </script>

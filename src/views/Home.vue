@@ -16,12 +16,17 @@
       <ul class="event-list">
         <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
           <h3>{{ eventItem.name }}</h3>
-          <img
-            v-if="eventItem.images"
-            img
-            :src="eventItem.images[0].url"
-            :alt="eventItem.name"
-          />
+          <div
+            class="image-container"
+          >
+            <img
+              v-if="eventItem.images"
+              img
+              :src="filterImages(eventItem.images)"
+              :alt="eventItem.name"
+              class="event-image"
+            />
+          </div>
           <p v-if="eventItem.classifications">
             <span class="event-subtitle">Categorie</span>
             {{ eventItem.classifications[0].segment.name }}
@@ -108,6 +113,13 @@ export default class Home extends Vue {
   //Save current event and venue id in local localStorage
   private saveEvent(eventItem: object): void {
     localStorage.setItem("currentEvent", JSON.stringify(eventItem));
+  }
+  //Filter images from the api and get back
+  //a image with a height bigger than 200px
+  private filterImages(images: object): object {
+    const filteredImages = images.filter( image => image.height > 200);
+
+    return filteredImages[0].url;
   }
   //Set up watcher for the the getter(the current categorie selected
   //by the user) and dispatch the api call for new events categorie

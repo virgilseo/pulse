@@ -13,12 +13,15 @@
     <section class="event-container" v-else>
       <div class="event-item event-randomize">
         <h3>{{ event.name }}</h3>
-        <img
-          v-if="event.images"
-          img
-          :src="event.images[0].url"
-          :alt="event.name"
-        />
+        <div class="image-container">
+          <img
+            class="event-image"
+            v-if="event.images"
+            img
+            :src="filterImages(event.images)"
+            :alt="event.name"
+          />
+        </div>
         <p v-if="event.classifications">
           <span class="event-subtitle">What</span>
           {{ event.classifications[0].segment.name }}
@@ -89,6 +92,13 @@ export default class Randomizer extends Vue {
   public randomize(): void {
      //Display random event on user input
     this.$store.dispatch("randomizer/randomize");
+  }
+  //Filter images from the api and get back
+  //a image with a height bigger than 200px
+  private filterImages(images: object): object {
+    const filteredImages = images.filter( image => image.height > 200);
+
+    return filteredImages[0].url;
   }
 }
 </script>
