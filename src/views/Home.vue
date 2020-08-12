@@ -110,7 +110,7 @@ export default class Home extends Vue {
     //Dispatch get request for 10 events from the tickemaster api
     this.$store.dispatch("home/getEvents");
   }
-  //Save current event and venue id in local localStorage
+  //Save current event in local localStorage
   private saveEvent(eventItem: object): void {
     localStorage.setItem("currentEvent", JSON.stringify(eventItem));
   }

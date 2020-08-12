@@ -83,6 +83,9 @@ export const related = {
   },
   actions: {
     getEvents({ commit }: ActionContext<object, object>): void {
+      commit("onError", false);
+      commit("onLoad", true);
+
       axios
         .get(
           `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&page=1&size=3&sort=random&venueId=${this.getters["related/getVenueId"]}`
