@@ -4,21 +4,36 @@ import {home} from "./home";
 import {randomizer} from "./randomizer";
 import {related} from "./related";
 
-
-
-type relatedModel = {
-namespaced: boolean;
-state: object;
-getters: object;
-mutations: object;
-actions: object;
-}
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations:{},
+  state: () => ({
+    showCategories: false,
+    showSort: false
+  }),
+  getters: {
+    showCategories(state) {
+      return state.showCategories;
+    },
+    showSort(state) {
+      return state.showSort;
+    }
+
+  },
+  mutations: {
+    toggleCategories(state) {
+      state.showCategories ? state.showCategories = false : state.showCategories = true;
+    },
+    toggleSort(state) {
+      state.showSort ? state.showSort = false: state.showSort = true;
+    },
+    closeDropDowns(state) {
+      state.showCategories ? state.showCategories = false : null;
+    },
+    closeSort(state) {
+      state.showSort ? state.showSort = false : null;
+    }
+  },
   actions: {},
   modules: {
    randomizer,

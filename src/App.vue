@@ -1,5 +1,9 @@
 <template>
-  <div id="app">
+  <div
+    @click="[showCategories ? closeDropDown($event) : null,
+             showSort ? closeSort($event) : null]"
+    id="app"
+  >
     <Header />
     <div id="nav">
       <div class="inner-nav">
@@ -21,6 +25,7 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import ScrollButton from "./components/ScrollButton.vue";
 import Categories from "./components/Categories.vue";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
@@ -28,6 +33,12 @@ import Categories from "./components/Categories.vue";
     Footer,
     ScrollButton,
     Categories
+  },
+  computed: {
+    ...mapGetters({
+      showCategories: "showCategories",
+      showSort: "showSort"
+    })
   }
 })
 export default class App extends Vue {
@@ -52,6 +63,24 @@ export default class App extends Vue {
       top: 0,
       behavior:'smooth'
     });
+  }
+  //Close categories dropdown on page click
+  private closeDropDown(e: any): void {
+    if (e.target.parentNode.parentNode.id !== "categories" &&
+        e.target.parentNode.parentNode.parentNode.id !== "categories" ) {
+
+        this.$store.commit("closeDropDowns");
+    }
+  }
+  //Close sort dropdown on page click
+  private closeSort(e: any): void {
+    if (e.target.parentNode.parentNode.parentNode.id !== "sort" &&
+        e.target.parentNode.parentNode.id !== "sort" &&
+        e.target.parentNode.id ==! "sort" &&
+        e.target.parentNode.parentNode.parentNode.id !== "sort-dropdown") {
+
+        this.$store.commit("closeSort");
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="sort-container">
+  <div id="sort" class="sort-container">
     <div @click="toggleSort" class="sort-menu">
       <span class="sort-label">Sort by</span>
       <i class="material-icons expand-icon">
@@ -7,10 +7,10 @@
         <span v-if="showSort">expand_less</span>
       </i>
     </div>
-    <div v-if="showSort" class="sort-items">
+    <div id="sort-dropdown" v-if="showSort" class="sort-items">
       <ul>
         <li
-          class="sort-item"
+           class="sort-item"
           @click="sortEvents(option)"
           v-for="option in sortOptions"
           :key="option.index"
@@ -53,7 +53,6 @@ type Sort = {
 @Component
 export default class SortEvents extends Vue {
   @Prop() events!: Array<EventStructure>;
-  private showSort = false;
   private sortOptions: Array<Sort> = [
     {name: "name A to Z", isSelected: false, type: "name"},
     {name: "name Z to A", isSelected: false, type: "name"},
@@ -62,7 +61,7 @@ export default class SortEvents extends Vue {
   ];
   //Toggle sort menu on user input
   private toggleSort() :void {
-    this.showSort ? this.showSort = false : this.showSort = true;
+    this.$store.commit("toggleSort");
   }
   //Sort events by date
   private sortByName(option: Sort): void {
@@ -106,6 +105,9 @@ export default class SortEvents extends Vue {
     } else {
       this.sortByDate(option);
     }
+  }
+  get showSort(): boolean {
+    return this.$store.getters.showSort;
   }
 }
 </script>

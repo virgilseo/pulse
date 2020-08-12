@@ -333,6 +333,10 @@ a {
   align-items: center;
 }
 
+.menu-container:hover {
+  cursor: pointer;
+}
+
 .categories-label, .sort-label {
   font-weight: 600;
 }
@@ -342,7 +346,7 @@ a {
   margin-left: 5px;
 }
 
-.dropdown-icon, .sort-icon:hover {
+.sort-icon:hover {
   cursor: pointer;
 }
 
