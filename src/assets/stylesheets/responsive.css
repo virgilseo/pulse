@@ -12,7 +12,7 @@
 
   .footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .related-event {
@@ -40,6 +40,17 @@
   .categorie-dropdown {
     width: 180px;
   }
+
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .related-header {
+    width: 65%;
+  }
+
 }
 
 @media only screen and (min-width: 850px) {
@@ -50,6 +61,11 @@
 
   .header-container, #nav {
     padding-left: 0;
+  }
+
+  .related-img {
+    width: 150px;
+    height: 150px;
   }
 }
 

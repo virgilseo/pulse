@@ -1,6 +1,6 @@
 <template>
-  <div @keydown.enter="toggleSort" tabindex="0" id="sort" class="sort-container">
-    <div @click="toggleSort" class="sort-menu">
+  <div @keydown.enter="toggleSort" id="sort" class="sort-container">
+    <div @click="toggleSort" tabindex="0" class="sort-menu">
       <span class="sort-label">Sort by</span>
       <i class="material-icons expand-icon">
         <span v-if="!showSort">expand_more</span>

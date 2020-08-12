@@ -1,6 +1,6 @@
 <template>
-  <div @keydown.enter="toggleDropDown" tabindex="0" id="categories" class="categories-container">
-    <div @click="toggleDropDown" class="menu-container">
+  <div @keydown.enter="toggleDropDown" id="categories" class="categories">
+    <div @click="toggleDropDown" tabindex="0"  class="menu-container">
       <span class="categories-label">Categories</span>
       <i class="material-icons dropdown-icon">
         <span v-if="!showCategories">expand_more</span>

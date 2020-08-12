@@ -9,14 +9,16 @@
         <span class="back-title">Back to events</span>
     </div>
     <div class="event-item event-details">
-      <h1>{{ event.name }}</h1>
-      <div class="image-container">
-        <img
-          class="event-image"
-          v-if="event.images"
-          :src="filterImages(event.images)"
-          :alt="event.name"
-        />
+      <div class="details-header">
+        <h1 class="related-header">{{ event.name }}</h1>
+        <div class="image-container related-img">
+          <img
+            class="event-image"
+            v-if="event.images"
+            :src="filterImages(event.images)"
+            :alt="event.name"
+          />
+        </div>
       </div>
       <p v-if="event.dates.start.dateTime">
         <span class="event-subtitle">Time </span>

@@ -14,42 +14,46 @@
     <section class="events-container" v-else>
       <SortEvents :events="this.events" />
       <ul class="event-list">
-        <li class="event-item" v-for="eventItem in events" :key="eventItem.id">
-          <h3>{{ eventItem.name }}</h3>
-          <div
-            class="image-container"
-          >
-            <img
-              v-if="eventItem.images"
-              img
-              :src="filterImages(eventItem.images)"
-              :alt="eventItem.name"
-              class="event-image"
-            />
+        <li class="event-item event-home" v-for="eventItem in events" :key="eventItem.id">
+          <div class="event">
+            <h3>{{ eventItem.name }}</h3>
+            <div
+              class="image-container"
+            >
+              <img
+                v-if="eventItem.images"
+                img
+                :src="filterImages(eventItem.images)"
+                :alt="eventItem.name"
+                class="event-image"
+              />
+            </div>
+            <p v-if="eventItem.classifications">
+              <span class="event-subtitle">Categorie</span>
+              {{ eventItem.classifications[0].segment.name }}
+            </p>
+            <p v-if="eventItem.dates.start">
+              <span class="event-subtitle">When</span>
+              {{ eventItem.dates.start.localTime }}
+              {{ eventItem.dates.start.localDate }}
+            </p>
+            <p v-if="eventItem._embedded.venues[0].address">
+              <span class="event-subtitle">Where</span>
+              {{ eventItem._embedded.venues[0].address.line1 }},
+              {{ eventItem._embedded.venues[0].city.name }}
+            </p>
           </div>
-          <p v-if="eventItem.classifications">
-            <span class="event-subtitle">Categorie</span>
-            {{ eventItem.classifications[0].segment.name }}
-          </p>
-          <p v-if="eventItem.dates.start">
-            <span class="event-subtitle">When</span>
-            {{ eventItem.dates.start.localTime }}
-            {{ eventItem.dates.start.localDate }}
-          </p>
-          <p v-if="eventItem._embedded.venues[0].address">
-            <span class="event-subtitle">Where</span>
-            {{ eventItem._embedded.venues[0].address.line1 }},
-            {{ eventItem._embedded.venues[0].city.name }}
-          </p>
-          <router-link
-            class="details-btn"
-            @click.native="saveEvent(eventItem)"
-            :to="{
-              name: 'details',
-              params: { eventId: eventItem.id, event: eventItem }
-            }"
-            >More details</router-link
-          >
+          <div class="btn-container">
+            <router-link
+              class="details-btn"
+              @click.native="saveEvent(eventItem)"
+              :to="{
+                name: 'details',
+                params: { eventId: eventItem.id, event: eventItem }
+              }"
+              >More details</router-link
+            >
+          </div>
         </li>
       </ul>
     </section>
