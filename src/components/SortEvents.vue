@@ -7,7 +7,7 @@
         <span v-if="showSort">expand_less</span>
       </i>
     </div>
-    <div id="sort-dropdown" v-if="showSort" class="sort-items">
+    <div v-if="showSort" class="sort-items">
       <ul>
         <li
           tabindex="0"
@@ -17,7 +17,7 @@
           v-for="option in sortOptions"
           :key="option.index"
         >
-          <span>{{ option.name }}</span>
+          {{ option.name }}
           <i v-if="option.isSelected" class="material-icons check-icon">check</i>
         </li>
       </ul>

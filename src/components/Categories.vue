@@ -7,7 +7,7 @@
         <span v-if="showCategories">expand_less</span>
       </i>
     </div>
-    <div id="categorie-items" v-if="showCategories" class="categorie-dropdown">
+    <div v-if="showCategories" class="categorie-dropdown">
       <ul>
         <li
           tabindex="0"

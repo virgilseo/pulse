@@ -66,7 +66,8 @@ export default class App extends Vue {
   }
   //Close categories dropdown on page click
   private closeDropDown(e: any): void {
-    if (e.target.parentNode.parentNode.id !== "categories" &&
+    if (e.target.parentNode.id !== "categories" &&
+        e.target.parentNode.parentNode.id !== "categories" &&
         e.target.parentNode.parentNode.parentNode.id !== "categories" ) {
 
         this.$store.commit("closeDropDowns");
@@ -74,10 +75,9 @@ export default class App extends Vue {
   }
   //Close sort dropdown on page click
   private closeSort(e: any): void {
-    if (e.target.parentNode.parentNode.parentNode.id !== "sort" &&
+    if (e.target.parentNode.id !== "sort" &&
         e.target.parentNode.parentNode.id !== "sort" &&
-        e.target.parentNode.id ==! "sort" &&
-        e.target.parentNode.parentNode.parentNode.id !== "sort-dropdown") {
+        e.target.parentNode.parentNode.parentNode.id !== "sort") {
 
         this.$store.commit("closeSort");
     }
