@@ -1,5 +1,5 @@
 <template>
-  <div  id="categories" class="categories-container">
+  <div @keydown.enter="toggleDropDown" tabindex="0" id="categories" class="categories-container">
     <div @click="toggleDropDown" class="menu-container">
       <span class="categories-label">Categories</span>
       <i class="material-icons dropdown-icon">
@@ -9,7 +9,14 @@
     </div>
     <div id="categorie-items" v-if="showCategories" class="categorie-dropdown">
       <ul>
-        <li class="categorie" @click="changeCategorie(categorie)" v-for="categorie in categories" :key="categorie.index">
+        <li
+          tabindex="0"
+          class="categorie"
+          @click="changeCategorie(categorie)"
+          @keydown.enter="changeCategorie(categorie)"
+          v-for="categorie in categories"
+          :key="categorie.index"
+        >
           {{ categorie.name }}
           <i v-if="categorie.isSelected" class="material-icons check-icon">check</i>
         </li>

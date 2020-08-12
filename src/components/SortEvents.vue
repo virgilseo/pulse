@@ -1,5 +1,5 @@
 <template>
-  <div id="sort" class="sort-container">
+  <div @keydown.enter="toggleSort" tabindex="0" id="sort" class="sort-container">
     <div @click="toggleSort" class="sort-menu">
       <span class="sort-label">Sort by</span>
       <i class="material-icons expand-icon">
@@ -10,7 +10,9 @@
     <div id="sort-dropdown" v-if="showSort" class="sort-items">
       <ul>
         <li
-           class="sort-item"
+          tabindex="0"
+          class="sort-item"
+          @keydown.enter="sortEvents(option)"
           @click="sortEvents(option)"
           v-for="option in sortOptions"
           :key="option.index"
