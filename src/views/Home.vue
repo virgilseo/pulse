@@ -65,33 +65,13 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import SortEvents from "../components/SortEvents.vue";
 
-//Create event type interface
-type start = {
-  localDate: string;
-};
-type dates = {
-  start: start;
-};
-type EventStructure = {
-  _embedded: object;
-  _links: object;
-  classifications: Array<object>;
-  dates: dates;
-  id: string;
-  images: Array<object>;
-  name: string;
-  priceRanges: Array<object>;
+//Create image interface
+type Image = {
+  fallback: boolean;
+  height: number;
+  ratio: string;
   url: string;
-};
-//Create response interface
-type Events = {
-  events: Array<EventStructure>;
-};
-type Embedded = {
-  _embedded: Events;
-};
-type Response = {
-  data: Embedded;
+  width: number;
 };
 
 @Component({
@@ -120,8 +100,8 @@ export default class Home extends Vue {
   }
   //Filter images from the api and get back
   //a image with a height bigger than 200px
-  private filterImages(images: object): object {
-    const filteredImages = images.filter( image => image.height > 200);
+  private filterImages(images: Array<Image>): string {
+    const filteredImages: Array<Image> = images.filter( (image: Image) => image.height > 200);
 
     return filteredImages[0].url;
   }

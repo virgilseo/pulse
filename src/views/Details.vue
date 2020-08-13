@@ -156,34 +156,13 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import axios from "axios";
 import { mapGetters } from "vuex";
 
-//Crette event type interface
-type Venue = {
-  id: string;
-  name: string;
-};
-type _Embedded = {
-  venues: Array<Venue>;
-};
-type EventStructure = {
-  _embedded: _Embedded;
-  _links: object;
-  classifications: Array<object>;
-  date: object;
-  id: string;
-  images: Array<object>;
-  name: string;
-  priceRanges: Array<object>;
+//Create image interface
+type Image = {
+  fallback: boolean;
+  height: number;
+  ratio: string;
   url: string;
-};
-//Create response interface
-type Events = {
-  events: Array<EventStructure>;
-};
-type Embedded = {
-  _embedded: Events;
-};
-type Response = {
-  data: Embedded;
+  width: number;
 };
 
 @Component({
@@ -216,8 +195,8 @@ export default class Home extends Vue {
   }
   //Filter images from the api and get back
   //a image with a height bigger than 200px
-  private filterImages(images: object): object {
-    const filteredImages = images.filter((image: object) => image.height > 200);
+  private filterImages(images: Array<Image>): string {
+    const filteredImages: Array<Image> = images.filter((image: Image) => image.height > 200);
 
     return filteredImages[0].url;
   }
