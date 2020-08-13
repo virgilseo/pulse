@@ -29,22 +29,6 @@ type Response = {
   data: Embedded;
 };
 
-type Getters = {
-  venueId: string;
-};
-
-type relatedModel = {
-namespaced: boolean;
-state: object;
-getters: object;
-mutations: object;
-actions: object;
-};
-
-type Actions = {
-  getters: object;
-};
-
 export const related = {
   namespaced: true,
   state: () => ({
@@ -82,13 +66,13 @@ export const related = {
     }
   },
   actions: {
-    getEvents({ commit }: ActionContext<object, object>): void {
+    getEvents({ commit, state }: ActionContext<StateEntity, object>): void {
       commit("onError", false);
       commit("onLoad", true);
 
       axios
         .get(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&page=1&size=3&sort=random&venueId=${this.getters["related/getVenueId"]}`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&page=1&size=3&sort=random&venueId=${state.venueId}`
         )
         .then((response: Response) => {
           commit("onSuccess", response.data._embedded.events);

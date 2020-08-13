@@ -77,12 +77,12 @@ export const home = {
     }
   },
   actions: {
-    getEvents({ commit }: ActionContext<object, object>) {
+    getEvents({ commit, state }: ActionContext<StateEntity, object>) {
       commit("onError", false);
       commit("onLoad", true);
       axios
         .get(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${this.getters["home/categorie"]}`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${state.categorie}`
         )
         .then((response: Response) => {
           commit("onSuccess", response.data._embedded.events);
