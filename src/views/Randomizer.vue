@@ -28,8 +28,7 @@
         </p>
         <p v-if="event.dates">
           <span class="event-subtitle">When</span>
-          {{ event.dates.start.localTime }} -
-          {{ event.dates.start.localDate }}
+          {{ new Date(event.dates.start.localDate).toDateString() }} 
         </p>
         <p v-if="event._embedded">
           <span class="event-subtitle">Where</span>

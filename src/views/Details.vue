@@ -22,7 +22,7 @@
       </div>
       <p v-if="event.dates.start.dateTime">
         <span class="event-subtitle">Time </span>
-        {{ new Date(event.dates.start.dateTime).toLocaleTimeString() }}
+        {{ new Date(event.dates.start.dateTime).toLocaleTimeString([], {timeStyle: 'short', minute: "2-digit"}) }}
       </p>
       <p v-if="event.dates.start.localDate">
         <span class="event-subtitle">Date </span>
@@ -153,7 +153,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import axios from "axios";
 import { mapGetters } from "vuex";
 
 //Create image interface
