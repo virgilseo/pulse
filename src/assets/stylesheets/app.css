@@ -46,14 +46,18 @@ a {
 .header-container {
   padding-left: 5%;
   overflow: auto;
+  background: #F6AD55;
+  color: #fff;
+  font-size: 1.4em;
+  line-height: 0.8;
 }
 .header-title {
   font-family: 'Ubuntu Mono', monospace;
-  color: #F6AD55;
 }
 
 .header-tagline {
-  font-style: oblique;
+  font-size: 0.9em;
+  font-weight: inherit;
 }
 
 .error-message {
@@ -89,7 +93,7 @@ a {
   font-weight: bold;
   margin-right: 15px;
   text-decoration: none;
-  color: #4A5568;
+  color: #505050;
   border-bottom: 5px solid transparent;
   padding-bottom: 8px;
 }
@@ -251,6 +255,7 @@ a {
 .footer-container {
   padding: 20px 5%;
   background: #F6AD55;
+  color: #505050;
 }
 
 .nav-title {
@@ -260,8 +265,8 @@ a {
 }
 
 .footer-links {
-  color: #4A5568;
   font-weight: 600;
+  color: #505050;
 }
 
 .footer-links:hover {
@@ -362,6 +367,10 @@ a {
 
 .categories-label, .sort-label {
   font-weight: 600;
+}
+
+.categories-label {
+  color: #505050;
 }
 
 .dropdown-icon {

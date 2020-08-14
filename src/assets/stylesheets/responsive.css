@@ -1,6 +1,6 @@
 @media only screen and (max-width: 330px) {
-  .categorie-dropdown {
-    width: 154px;
+  #app {
+    font-size: 0.9em;
   }
 }
 
@@ -35,6 +35,10 @@
 
   .event-details {
     width: 60%;
+  }
+
+  .event-home {
+    height: 480px;
   }
 }
 
@@ -73,6 +77,11 @@
     width: 150px;
     height: 150px;
   }
+
+  .event-home {
+    height: 430px;
+  }
+
 }
 
 @media only screen and (min-width: 1000px) {
