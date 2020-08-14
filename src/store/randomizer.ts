@@ -58,7 +58,7 @@ export const randomizer = {
     }
   },
   actions: {
-    randomize({ commit }: ActionContext<object, object>) {
+    randomize({ commit }: ActionContext<StateEntity, object>) {
       const sortTerms: Array<string> = [
         "name,asc",
         "name,desc",

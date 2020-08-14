@@ -6,31 +6,36 @@ import {related} from "./related";
 
 Vue.use(Vuex);
 
+type StateEntity = {
+  showCategories: boolean;
+  showSort: boolean;
+};
+
 export default new Vuex.Store({
   state: () => ({
     showCategories: false,
     showSort: false
   }),
   getters: {
-    showCategories(state) {
+    showCategories(state: StateEntity): boolean {
       return state.showCategories;
     },
-    showSort(state) {
+    showSort(state: StateEntity): boolean {
       return state.showSort;
     }
 
   },
   mutations: {
-    toggleCategories(state) {
+    toggleCategories(state: StateEntity) {
       state.showCategories ? state.showCategories = false : state.showCategories = true;
     },
-    toggleSort(state) {
+    toggleSort(state: StateEntity) {
       state.showSort ? state.showSort = false: state.showSort = true;
     },
-    closeDropDowns(state) {
+    closeDropDowns(state: StateEntity) {
       state.showCategories ? state.showCategories = false : null;
     },
-    closeSort(state) {
+    closeSort(state: StateEntity) {
       state.showSort ? state.showSort = false : null;
     }
   },
