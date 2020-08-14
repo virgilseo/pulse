@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {home} from "./home";
-import {randomizer} from "./randomizer";
-import {related} from "./related";
+import { home } from "./home";
+import { randomizer } from "./randomizer";
+import { related } from "./related";
 
 Vue.use(Vuex);
 
@@ -23,26 +23,27 @@ export default new Vuex.Store({
     showSort(state: StateEntity): boolean {
       return state.showSort;
     }
-
   },
   mutations: {
     toggleCategories(state: StateEntity) {
-      state.showCategories ? state.showCategories = false : state.showCategories = true;
+      state.showCategories
+        ? (state.showCategories = false)
+        : (state.showCategories = true);
     },
     toggleSort(state: StateEntity) {
-      state.showSort ? state.showSort = false: state.showSort = true;
+      state.showSort ? (state.showSort = false) : (state.showSort = true);
     },
     closeDropDowns(state: StateEntity) {
-      state.showCategories ? state.showCategories = false : null;
+      state.showCategories ? (state.showCategories = false) : null;
     },
     closeSort(state: StateEntity) {
-      state.showSort ? state.showSort = false : null;
+      state.showSort ? (state.showSort = false) : null;
     }
   },
   actions: {},
   modules: {
-   randomizer,
-   home,
-   related
+    randomizer,
+    home,
+    related
   }
 });

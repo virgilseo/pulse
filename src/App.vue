@@ -1,7 +1,11 @@
 <template>
   <div
-    @click="[showCategories ? closeDropDown($event) : null,
-             showSort ? closeSort($event) : null]"
+    @click="
+      [
+        showCategories ? closeDropDown($event) : null,
+        showSort ? closeSort($event) : null
+      ]
+    "
     id="app"
   >
     <Header />
@@ -61,25 +65,27 @@ export default class App extends Vue {
   private scrollTop(): void {
     window.scrollTo({
       top: 0,
-      behavior:'smooth'
+      behavior: "smooth"
     });
   }
   //Close categories dropdown on page click
   private closeDropDown(e: any): void {
-    if (e.target.parentNode.id !== "categories" &&
-        e.target.parentNode.parentNode.id !== "categories" &&
-        e.target.parentNode.parentNode.parentNode.id !== "categories" ) {
-
-        this.$store.commit("closeDropDowns");
+    if (
+      e.target.parentNode.id !== "categories" &&
+      e.target.parentNode.parentNode.id !== "categories" &&
+      e.target.parentNode.parentNode.parentNode.id !== "categories"
+    ) {
+      this.$store.commit("closeDropDowns");
     }
   }
   //Close sort dropdown on page click
   private closeSort(e: any): void {
-    if (e.target.parentNode.id !== "sort" &&
-        e.target.parentNode.parentNode.id !== "sort" &&
-        e.target.parentNode.parentNode.parentNode.id !== "sort") {
-
-        this.$store.commit("closeSort");
+    if (
+      e.target.parentNode.id !== "sort" &&
+      e.target.parentNode.parentNode.id !== "sort" &&
+      e.target.parentNode.parentNode.parentNode.id !== "sort"
+    ) {
+      this.$store.commit("closeSort");
     }
   }
 }

@@ -6,7 +6,7 @@
           arrow_back
         </i>
       </router-link>
-        <span class="back-title">Back to events</span>
+      <span class="back-title">Back to events</span>
     </div>
     <div class="event-item event-details">
       <div class="details-header">
@@ -22,7 +22,12 @@
       </div>
       <p v-if="event.dates.start.dateTime">
         <span class="event-subtitle">Time </span>
-        {{ new Date(event.dates.start.dateTime).toLocaleTimeString([], {timeStyle: 'short', minute: "2-digit"}) }}
+        {{
+          new Date(event.dates.start.dateTime).toLocaleTimeString([], {
+            timeStyle: "short",
+            minute: "2-digit"
+          })
+        }}
       </p>
       <p v-if="event.dates.start.localDate">
         <span class="event-subtitle">Date </span>
@@ -47,7 +52,7 @@
       </p>
       <p v-if="event.promoter">
         <span class="event-subtitle">Promoter </span>
-        {{event.promoter.name}}
+        {{ event.promoter.name }}
       </p>
       <section v-if="event.sales">
         <p v-if="event.sales.public.startDateTime">
@@ -95,7 +100,8 @@
       <section v-else-if="error">
         <p class="error-message">
           <i class="material-icons error-icon">error</i>
-          Something went wrong</p>
+          Something went wrong
+        </p>
       </section>
       <ul v-else class="related-list">
         <li
@@ -180,7 +186,10 @@ export default class Home extends Vue {
   //Get 3 related events form the api after the component mounts
   mounted() {
     //Save venue id to global state
-    this.$store.commit("related/saveVenueId", this.event._embedded.venues[0].id);
+    this.$store.commit(
+      "related/saveVenueId",
+      this.event._embedded.venues[0].id
+    );
 
     this.$store.dispatch("related/getEvents");
   }
@@ -195,7 +204,9 @@ export default class Home extends Vue {
   //Filter images from the api and get back
   //a image with a height bigger than 200px
   private filterImages(images: Array<Image>): string {
-    const filteredImages: Array<Image> = images.filter((image: Image) => image.height > 200);
+    const filteredImages: Array<Image> = images.filter(
+      (image: Image) => image.height > 200
+    );
 
     return filteredImages[0].url;
   }

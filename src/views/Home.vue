@@ -6,20 +6,23 @@
         <div class="loader"></div>
       </div>
     </section>
-    <section  class="error-container" v-else-if="error">
+    <section class="error-container" v-else-if="error">
       <p class="error-message">
         <i class="material-icons error-icon">error</i>
-        Something went wrong</p>
+        Something went wrong
+      </p>
     </section>
     <section class="events-container" v-else>
       <SortEvents :events="this.events" />
       <ul class="event-list">
-        <li class="event-item event-home" v-for="eventItem in events" :key="eventItem.id">
+        <li
+          class="event-item event-home"
+          v-for="eventItem in events"
+          :key="eventItem.id"
+        >
           <div class="event">
             <h3>{{ eventItem.name }}</h3>
-            <div
-              class="image-container"
-            >
+            <div class="image-container">
               <img
                 v-if="eventItem.images"
                 img
@@ -100,7 +103,9 @@ export default class Home extends Vue {
   //Filter images from the api and get back
   //a image with a height bigger than 200px
   private filterImages(images: Array<Image>): string {
-    const filteredImages: Array<Image> = images.filter( (image: Image) => image.height > 200);
+    const filteredImages: Array<Image> = images.filter(
+      (image: Image) => image.height > 200
+    );
 
     return filteredImages[0].url;
   }

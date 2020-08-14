@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ActionContext } from 'vuex';
+import { ActionContext } from "vuex";
 
 type StateEntity = {
   loading: boolean;
@@ -35,7 +35,7 @@ export const related = {
     loading: false,
     error: false,
     events: [],
-    venueId: "",
+    venueId: ""
   }),
   getters: {
     getLoading(state: StateEntity): boolean {
@@ -55,11 +55,11 @@ export const related = {
     onSuccess(state: StateEntity, response: Array<EventStructure>) {
       state.events = response;
     },
-    onError(state: StateEntity,  val: boolean) {
+    onError(state: StateEntity, val: boolean) {
       state.error = val;
     },
     onLoad(state: StateEntity, val: boolean) {
-      state.loading= val;
+      state.loading = val;
     },
     saveVenueId(state: StateEntity, val: string) {
       state.venueId = val;
@@ -86,5 +86,4 @@ export const related = {
         });
     }
   }
-
 };

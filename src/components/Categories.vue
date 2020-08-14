@@ -1,6 +1,6 @@
 <template>
   <div @keydown.enter="toggleDropDown" id="categories" class="categories">
-    <div @click="toggleDropDown" tabindex="0"  class="menu-container">
+    <div @click="toggleDropDown" tabindex="0" class="menu-container">
       <span class="categories-label">Categories</span>
       <i class="material-icons dropdown-icon">
         <span v-if="!showCategories">expand_more</span>
@@ -18,7 +18,9 @@
           :key="categorie.index"
         >
           {{ categorie.name }}
-          <i v-if="categorie.isSelected" class="material-icons check-icon">check</i>
+          <i v-if="categorie.isSelected" class="material-icons check-icon"
+            >check</i
+          >
         </li>
       </ul>
     </div>
@@ -40,7 +42,7 @@ export default class Categories extends Vue {
   private categories: Array<Categorie> = [
     { name: "music", isSelected: true },
     { name: "arts & theatre", isSelected: false },
-    { name: "miscellaneous", isSelected: false },
+    { name: "miscellaneous", isSelected: false }
   ];
 
   mounted() {
@@ -49,7 +51,7 @@ export default class Categories extends Vue {
     this.categories.forEach(item => {
       item.isSelected = false;
 
-      if(item.name === this.currentCategorie) {
+      if (item.name === this.currentCategorie) {
         item.isSelected = true;
       }
     });
@@ -58,12 +60,12 @@ export default class Categories extends Vue {
   //Toggle categories menu on user input
   private toggleDropDown(): void {
     this.$store.commit("toggleCategories");
-  //  this.showCategories ? this.showCategories = false : this.showCategories = true;
+    //  this.showCategories ? this.showCategories = false : this.showCategories = true;
   }
   //Change categories on user input
   private changeCategorie(categorie: Categorie): void {
     this.categories.forEach(item => {
-      item.isSelected = false
+      item.isSelected = false;
     });
     categorie.isSelected = true;
     this.$store.commit("home/updateCategorie", categorie.name);
@@ -76,5 +78,4 @@ export default class Categories extends Vue {
     return this.$store.getters.showCategories;
   }
 }
-
 </script>

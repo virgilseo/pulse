@@ -1,6 +1,5 @@
 import axios from "axios";
-import { ActionContext } from 'vuex';
-
+import { ActionContext } from "vuex";
 
 //Create event type interface
 type start = {

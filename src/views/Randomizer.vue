@@ -8,7 +8,8 @@
     <section class="error-container" v-else-if="error">
       <p class="error-message">
         <i class="material-icons error-icon">error</i>
-        Something went wrong</p>
+        Something went wrong
+      </p>
     </section>
     <section class="event-container" v-else>
       <div class="event-item event-randomize">
@@ -28,7 +29,7 @@
         </p>
         <p v-if="event.dates">
           <span class="event-subtitle">When</span>
-          {{ new Date(event.dates.start.localDate).toDateString() }} 
+          {{ new Date(event.dates.start.localDate).toDateString() }}
         </p>
         <p v-if="event._embedded">
           <span class="event-subtitle">Where</span>
@@ -70,19 +71,20 @@ type Image = {
   }
 })
 export default class Randomizer extends Vue {
-
   mounted() {
     //Display random event on page load
     this.$store.dispatch("randomizer/randomize");
   }
   public randomize(): void {
-     //Display random event on user input
+    //Display random event on user input
     this.$store.dispatch("randomizer/randomize");
   }
   //Filter images from the api and get back
   //a image with a height bigger than 200px
   private filterImages(images: Array<Image>): string {
-    const filteredImages: Array<Image> = images.filter( (image: Image) => image.height > 200);
+    const filteredImages: Array<Image> = images.filter(
+      (image: Image) => image.height > 200
+    );
 
     return filteredImages[0].url;
   }

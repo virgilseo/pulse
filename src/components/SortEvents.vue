@@ -18,7 +18,9 @@
           :key="option.index"
         >
           {{ option.name }}
-          <i v-if="option.isSelected" class="material-icons check-icon">check</i>
+          <i v-if="option.isSelected" class="material-icons check-icon"
+            >check</i
+          >
         </li>
       </ul>
     </div>
@@ -56,13 +58,13 @@ type Sort = {
 export default class SortEvents extends Vue {
   @Prop() events!: Array<EventStructure>;
   private sortOptions: Array<Sort> = [
-    {name: "name A to Z", isSelected: false, type: "name"},
-    {name: "name Z to A", isSelected: false, type: "name"},
-    {name: "happening Sooner", isSelected: false, type: "date"},
-    {name: "happening Later", isSelected: false, type: "date"}
+    { name: "name A to Z", isSelected: false, type: "name" },
+    { name: "name Z to A", isSelected: false, type: "name" },
+    { name: "happening Sooner", isSelected: false, type: "date" },
+    { name: "happening Later", isSelected: false, type: "date" }
   ];
   //Toggle sort menu on user input
-  private toggleSort() :void {
+  private toggleSort(): void {
     this.$store.commit("toggleSort");
   }
   //Sort events by date
@@ -72,7 +74,7 @@ export default class SortEvents extends Vue {
       const x = a.name.toLowerCase();
       const y = b.name.toLowerCase();
 
-      if ( option.name === "name A to Z" ) {
+      if (option.name === "name A to Z") {
         return x < y ? -1 : x > y ? 1 : 0;
       } else {
         return x > y ? -1 : x > y ? 1 : 0;
@@ -87,7 +89,7 @@ export default class SortEvents extends Vue {
       const x = Date.parse(a.dates.start.localDate);
       const y = Date.parse(b.dates.start.localDate);
 
-      if ( option.name === "happening Sooner") {
+      if (option.name === "happening Sooner") {
         return x - y;
       } else {
         return x > y ? -1 : x > y ? 1 : 0;

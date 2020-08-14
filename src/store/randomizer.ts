@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ActionContext } from 'vuex';
+import { ActionContext } from "vuex";
 
 type StateEntity = {
   loading: boolean;
@@ -33,7 +33,7 @@ export const randomizer = {
   state: () => ({
     loading: false,
     error: false,
-    event: {},
+    event: {}
   }),
   getters: {
     loading(state: StateEntity): boolean {
@@ -76,7 +76,8 @@ export const randomizer = {
         "venueName,desc",
         "random"
       ];
-      const sortItem: string = sortTerms[(sortTerms.length * Math.random()) | 0];
+      const sortItem: string =
+        sortTerms[(sortTerms.length * Math.random()) | 0];
 
       const classTerms: Array<string> = [
         "Music",
@@ -87,7 +88,8 @@ export const randomizer = {
         "Metal",
         "Jazz"
       ];
-      const classItem: string = classTerms[(classTerms.length * Math.random()) | 0];
+      const classItem: string =
+        classTerms[(classTerms.length * Math.random()) | 0];
 
       commit("onError", false);
       commit("onLoad", true);
