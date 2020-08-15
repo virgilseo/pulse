@@ -1,14 +1,16 @@
 <template>
-  <div @keydown.enter="toggleSort" id="sort" class="sort-container">
-    <div @click="toggleSort" tabindex="0" class="sort-menu">
+  <div @keydown.enter="toggleSort" class="sort-container">
+    <div @click="toggleSort" tabindex="0" id="sort" class="sort-menu">
       <span class="sort-label">Sort by</span>
-      <i class="material-icons expand-icon">
-        <span v-if="!showSort">expand_more</span>
-        <span v-if="showSort">expand_less</span>
+      <i v-if="!showSort" class="material-icons expand-icon">
+        expand_more
+      </i>
+      <i v-if="showSort" class="material-icons expand-icon">
+        expand_less
       </i>
     </div>
     <div v-if="showSort" class="sort-items">
-      <ul>
+      <ul id="sort-list">
         <li
           tabindex="0"
           class="sort-item"

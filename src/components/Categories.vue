@@ -1,14 +1,21 @@
 <template>
-  <div @keydown.enter="toggleDropDown" id="categories" class="categories">
-    <div @click="toggleDropDown" tabindex="0" class="menu-container">
+  <div @keydown.enter="toggleDropDown" class="categories">
+    <div
+      @click="toggleDropDown"
+      id="categories"
+      tabindex="0"
+      class="menu-container"
+    >
       <span class="categories-label">Categories</span>
-      <i class="material-icons dropdown-icon">
-        <span v-if="!showCategories">expand_more</span>
-        <span v-if="showCategories">expand_less</span>
+      <i v-if="!showCategories" class="material-icons dropdown-icon">
+        expand_more
+      </i>
+      <i v-if="showCategories" class="material-icons dropdown-icon">
+        expand_less
       </i>
     </div>
     <div v-if="showCategories" class="categorie-dropdown">
-      <ul>
+      <ul id="categories-list">
         <li
           tabindex="0"
           class="categorie"

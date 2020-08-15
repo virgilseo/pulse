@@ -69,21 +69,21 @@ export default class App extends Vue {
     });
   }
   //Close categories dropdown on page click
-  private closeDropDown(e: any): void {
+  private closeDropDown(e: { target: HTMLElement }): void {
     if (
-      e.target.parentNode.id !== "categories" &&
-      e.target.parentNode.parentNode.id !== "categories" &&
-      e.target.parentNode.parentNode.parentNode.id !== "categories"
+      (e.target as HTMLElement).id !== "categories" &&
+      (e.target.parentNode as HTMLElement).id !== "categories" &&
+      (e.target.parentNode as HTMLElement).id !== "categories-list"
     ) {
       this.$store.commit("closeDropDowns");
     }
   }
   //Close sort dropdown on page click
-  private closeSort(e: any): void {
+  private closeSort(e: { target: HTMLElement }): void {
     if (
-      e.target.parentNode.id !== "sort" &&
-      e.target.parentNode.parentNode.id !== "sort" &&
-      e.target.parentNode.parentNode.parentNode.id !== "sort"
+      (e.target as HTMLElement).id !== "sort" &&
+      (e.target.parentNode as HTMLElement).id !== "sort" &&
+      (e.target.parentNode as HTMLElement).id !== "sort-list"
     ) {
       this.$store.commit("closeSort");
     }
