@@ -165,17 +165,13 @@ a {
   border-radius: 50%;
 }
 
-.event-home {
-  height: 430px;
-}
-
 .event {
   padding: 0;
-  height: 70%;
+  height: 80%;
 }
 
 .btn-container {
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
 }
@@ -225,6 +221,10 @@ a {
 
 .related-header {
   color: #718096;
+}
+
+.related-image {
+  margin: auto;
 }
 
 /*Randomizer*/

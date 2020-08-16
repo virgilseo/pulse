@@ -109,7 +109,7 @@
           v-for="relatedEvent in relatedEvents"
           :key="relatedEvent.id"
         >
-          <div class="image-container">
+          <div class="image-container related-image">
             <img
               class="event-image"
               v-if="relatedEvent.images"
