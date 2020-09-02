@@ -24,8 +24,9 @@
         <span class="event-subtitle">Time </span>
         {{
           new Date(event.dates.start.dateTime).toLocaleTimeString([], {
-            timeStyle: "short",
-            minute: "2-digit"
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
           })
         }}
       </p>
