@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <h3>Amsterdam Events</h3>
+    <div class="events-header">
+      <h3>Amsterdam Events</h3>
+      <i v-if="pageNumber >= 2" class="material-icons" @click="previousPage">
+        keyboard_arrow_left
+      </i>
+      <i class="material-icons" @click="nextPage">keyboard_arrow_right</i>
+    </div>
     <section v-if="loading">
       <div class="loader-container">
         <div class="loader"></div>
@@ -85,7 +91,8 @@ type Image = {
       loading: "home/loading",
       error: "home/error",
       events: "home/events",
-      categorie: "home/categorie"
+      categorie: "home/categorie",
+      pageNumber: "home/pageNumber"
     })
   }
 })
@@ -108,6 +115,18 @@ export default class Home extends Vue {
     );
 
     return filteredImages[0].url;
+  }
+  //Display next 10 events when the user clicks the next button
+  private nextPage(): void {
+    this.$store.commit("home/incrementPage");
+
+    this.$store.dispatch("home/getEvents");
+  }
+  //Go back the previous events on user input
+  private previousPage(): void {
+    this.$store.commit("home/decrementPage");
+
+    this.$store.dispatch("home/getEvents");
   }
   //Set up watcher for the the getter(the current categorie selected
   //by the user) and dispatch the api call for new events categorie

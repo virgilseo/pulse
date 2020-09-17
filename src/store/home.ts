@@ -13,6 +13,7 @@ type StateEntity = {
   error: boolean;
   events: Array<EventStructure>;
   categorie: string;
+  page: number;
 };
 type EventStructure = {
   _embedded: object;
@@ -42,7 +43,8 @@ export const home = {
     loading: false,
     error: false,
     events: [],
-    categorie: "music"
+    categorie: "music",
+    page: 1
   }),
   getters: {
     loading(state: StateEntity): boolean {
@@ -56,6 +58,9 @@ export const home = {
     },
     categorie(state: StateEntity): string {
       return state.categorie;
+    },
+    pageNumber(state: StateEntity): number {
+      return state.page;
     }
   },
   mutations: {
@@ -73,6 +78,12 @@ export const home = {
     },
     updateCategorie(state: StateEntity, val: string) {
       state.categorie = val;
+    },
+    incrementPage(state: StateEntity) {
+      state.page++;
+    },
+    decrementPage(state: StateEntity) {
+      state.page--;
     }
   },
   actions: {
@@ -81,7 +92,7 @@ export const home = {
       commit("onLoad", true);
       axios
         .get(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=1&size=10&sort=random&classificationName=${state.categorie}`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=${state.page}&size=10&sort=random&classificationName=${state.categorie}`
         )
         .then((response: Response) => {
           commit("onSuccess", response.data._embedded.events);
