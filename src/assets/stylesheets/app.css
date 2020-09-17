@@ -180,6 +180,34 @@ a {
   padding-bottom: 60px ;
 }
 
+.categorie-title {
+  color: #F6AD55;
+}
+
+.events-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-next:hover,.page-back:hover {
+  cursor: pointer;
+  background: #F6AD55;
+  transition-duration: 0.2s;
+  color: #fff;
+}
+
+.page-next,.page-back {
+  border-radius: 50%;
+  font-size: 2em;
+}
+
+.page-nav-container {
+  display: flex;
+  allign-items: center;
+}
+
+
 /*Details*/
 
 .link-container {

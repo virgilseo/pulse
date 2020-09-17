@@ -1,11 +1,21 @@
 <template>
   <div class="home">
     <div class="events-header">
-      <h3>Amsterdam Events</h3>
-      <i v-if="pageNumber >= 2" class="material-icons" @click="previousPage">
-        keyboard_arrow_left
-      </i>
-      <i class="material-icons" @click="nextPage">keyboard_arrow_right</i>
+      <h3>
+        Amsterdam <span class="categorie-title">{{ categorie }}</span> Events
+      </h3>
+      <div class="page-nav-container">
+        <i
+          v-if="pageNumber >= 2"
+          class="material-icons page-back"
+          @click="previousPage"
+        >
+          keyboard_arrow_left
+        </i>
+        <i class="material-icons page-next" @click="nextPage">
+          keyboard_arrow_right
+        </i>
+      </div>
     </div>
     <section v-if="loading">
       <div class="loader-container">
