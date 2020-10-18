@@ -204,7 +204,15 @@ a {
 
 .page-nav-container {
   display: flex;
-  allign-items: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-number {
+  font-size: 1.1em;
+  font-weight: 600;
+  width: 20px;
+  text-align: center;
 }
 
 

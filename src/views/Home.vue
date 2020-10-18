@@ -12,6 +12,7 @@
         >
           keyboard_arrow_left
         </i>
+        <span class="page-number">{{ pageNumber }}</span>
         <i
           v-if="events.length === 10"
           class="material-icons page-next"
