@@ -12,7 +12,11 @@
         >
           keyboard_arrow_left
         </i>
-        <i class="material-icons page-next" @click="nextPage">
+        <i
+          v-if="events.length === 10"
+          class="material-icons page-next"
+          @click="nextPage"
+        >
           keyboard_arrow_right
         </i>
       </div>
