@@ -42,8 +42,7 @@
           :key="eventItem.id"
         >
           <div class="event">
-            <h3>{{ eventItem.name }}</h3>
-            <div class="image-container">
+            <div class="image-container homeImage-container">
               <img
                 v-if="eventItem.images"
                 img
@@ -52,6 +51,7 @@
                 class="event-image"
               />
             </div>
+            <h3>{{ eventItem.name }}</h3>
             <p v-if="eventItem.classifications">
               <span class="event-subtitle">Categorie</span>
               {{ eventItem.classifications[0].segment.name }}

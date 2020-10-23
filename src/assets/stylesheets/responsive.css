@@ -39,11 +39,14 @@
 
   .event-details {
     width: 60%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .event-home {
     height: 450px;
   }
+
 }
 
 @media only screen and (min-width: 700px) {
@@ -72,6 +75,9 @@
     width: 80%;
     margin: auto;
   }
+  .footer-container {
+    padding: 20px 0;
+  }
 
   .header-container, #nav {
     padding-left: 0;
@@ -84,6 +90,10 @@
 
   .event-home {
     height: 430px;
+  }
+
+  .event-container {
+    height: 80vh;
   }
 
 }
@@ -101,15 +111,48 @@
 
   .event-home {
     height: 400px;
+    margin-right: 20px;
+    width: 260px;
   }
 
-  .home, .randomizer, .details-page, .inner-header, .footer, .inner-nav {
+  .page-nav-container {
+    margin-right: 3%;
+  }
+
+  .event-list {
+    justify-content: flex-start;
+    margin: auto;
+  }
+
+  .home, .randomizer, .inner-header, .footer, .inner-nav {
+    width: 90%;
+  }
+
+  .details-page {
     width: 60%;
+    margin: auto;
+  }
+
+  .event-randomize {
+    width: 330px;
+  }
+
+  .attr-container {
+    margin-right: 30px;
+  }
+
+  .inner-header {
+    font-size: 1.2em;
+  }
+
+  .btn-container {
+    height: 32%;
   }
 }
 
-@media only screen and (min-width: 1400px){
-  .home, .randomizer, .details-page, .inner-header, .footer, .inner-nav {
-    width: 55%;
+@media only screen and (min-width: 1440px) {
+  .event-home {
+    width: 320px;
+    margin-right: 30px;
   }
 }

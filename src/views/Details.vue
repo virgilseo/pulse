@@ -1,14 +1,11 @@
 <template>
   <div class="details-page">
-    <div class="link-container">
+    <div class="event-item event-details">
       <router-link class="back-link" to="/">
         <i class="material-icons back-icon">
           arrow_back
         </i>
       </router-link>
-      <span class="back-title">Back to events</span>
-    </div>
-    <div class="event-item event-details">
       <div class="details-header">
         <h1 class="related-header">{{ event.name }}</h1>
         <div class="image-container related-img">
@@ -73,7 +70,7 @@
         <span class="event-subtitle">Type </span>
         {{ event.classifications[0].segment.name }}
       </p>
-      <p>
+      <p class="details-btn-container">
         <a
           class="details-btn"
           v-if="event.url"

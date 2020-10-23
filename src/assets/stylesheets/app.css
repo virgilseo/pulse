@@ -86,8 +86,7 @@ a {
   padding-left:5%;
   background: #F6AD55;
   margin-top: 0;
-  padding-top: 16px;
-  box-shadow: 0px 0px 1px 0px #4A5568;
+  padding-top: 20px;
 }
 
 #nav a {
@@ -100,20 +99,23 @@ a {
 }
 
 #nav a.router-link-exact-active {
-  border-bottom: 5px solid #fff;
+  color: #fff;
 }
 
 #nav a:hover {
-  border-bottom: 5px solid #EDF2F7;
-  transition: 0.2s;
+  color: #fff;
+  transition-duration: 0.2s;
 }
+
 #nav a:focus {
+  color: #fff;
   outline: none;
-  border-bottom: 5px solid #EDF2F7;
+  transition-duration: 0.2s;
 }
 
 .inner-nav {
   display: flex;
+  font-size: 1.1em;
 }
 
 /*Home*/
@@ -158,6 +160,11 @@ a {
   border-radius: 50%;
 }
 
+.homeImage-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .event-image {
   object-fit: cover;
   height: 100%;
@@ -174,6 +181,7 @@ a {
   height: 20%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .events-container {
@@ -224,19 +232,24 @@ a {
   padding: 20px 0px;
 }
 
-
+.event-details {
+  margin-top: 40px;
+}
 
 .back-icon {
-  margin-right: 7px;
-  font-size: 1.8em;
-  color: #F6AD55;
+  font-size: 1.6em;
+  color: #fff;
   border-radius: 50%;
-  padding: 4px;
+  padding: 5px;
+  background: #F6AD55;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
 }
 .back-icon:hover {
-  background: #F6AD55;
-  color: #fff;
-  transition: 0.2s;
+  background: #F7FAFC;
+  color: #F6AD55;
+  transition: 0.3s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .back-title {
@@ -263,11 +276,14 @@ a {
   margin: auto;
 }
 
+.details-btn-container, .seat-link {
+  text-align: center;
+}
+
 /*Randomizer*/
 
 .event-container {
   padding: 30px 0px;
-  height: 80vh;
 }
 
 .randomize-btn {
@@ -384,18 +400,13 @@ a {
   border-bottom: 5px solid transparent;
   padding-bottom: 8px;
 }
-.menu-container:hover {
-  transition: 0.2s;
-  border-bottom: 5px solid #E2E8F0;
-}
+
 .menu-container:focus {
   outline: none;
-  border-bottom: 5px solid #E2E8F0;
 }
 
 .menu-container {
   display: flex;
-  align-items: center;
 }
 
 .menu-container:hover {
@@ -433,6 +444,10 @@ a {
   display: flex;
   justify-content: space-between;
   padding: 4px 18px;
+}
+
+.categorie {
+  font-size: 0.9em;
 }
 
 .categorie:hover {
