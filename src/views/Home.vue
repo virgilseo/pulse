@@ -14,7 +14,7 @@
         </i>
         <span class="page-number">{{ pageNumber }}</span>
         <i
-          v-if="events.length === 10"
+          v-if="events.length === 12"
           class="material-icons page-next"
           @click="nextPage"
         >

@@ -92,7 +92,7 @@ export const home = {
       commit("onLoad", true);
       axios
         .get(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=${state.page}&size=10&sort=random&classificationName=${state.categorie}`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=TROvAEVWbwaLGs6P8wsutq4jzMGkwQky&city=Amsterdam&page=${state.page}&size=12&sort=random&classificationName=${state.categorie}`
         )
         .then((response: Response) => {
           commit("onSuccess", response.data._embedded.events);
