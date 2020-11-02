@@ -14,6 +14,7 @@ type StateEntity = {
   events: Array<EventStructure>;
   categorie: string;
   page: number;
+  changePage: boolean;
 };
 type EventStructure = {
   _embedded: object;
@@ -44,7 +45,8 @@ export const home = {
     error: false,
     events: [],
     categorie: "music",
-    page: 1
+    page: 1,
+    changePage: false
   }),
   getters: {
     loading(state: StateEntity): boolean {
@@ -84,10 +86,15 @@ export const home = {
     },
     decrementPage(state: StateEntity) {
       state.page--;
+    },
+    signalPageChange(state: StateEntity) {
+      !state.changePage ? (state.changePage = true)    : 
+      (state.changePage = false);
     }
   },
   actions: {
     getEvents({ commit, state }: ActionContext<StateEntity, object>) {
+      if (state.events.length && !state.changePage) return;
       commit("onError", false);
       commit("onLoad", true);
       axios
@@ -96,6 +103,7 @@ export const home = {
         )
         .then((response: Response) => {
           commit("onSuccess", response.data._embedded.events);
+          commit("signalPageChange");
         })
         .catch((error: Error) => {
           commit("onError", true);

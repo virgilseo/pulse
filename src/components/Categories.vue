@@ -76,6 +76,7 @@ export default class Categories extends Vue {
     });
     categorie.isSelected = true;
     this.$store.commit("home/updateCategorie", categorie.name);
+    this.$store.commit("home/signalPageChange");
   }
   //Get current categorie selection from the store
   get currentCategorie(): string {

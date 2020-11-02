@@ -134,13 +134,13 @@ export default class Home extends Vue {
   //Display next 10 events when the user clicks the next button
   private nextPage(): void {
     this.$store.commit("home/incrementPage");
-
+    this.$store.commit("home/signalPageChange");
     this.$store.dispatch("home/getEvents");
   }
   //Go back the previous events on user input
   private previousPage(): void {
     this.$store.commit("home/decrementPage");
-
+    this.$store.commit("home/signalPageChange");
     this.$store.dispatch("home/getEvents");
   }
   //Set up watcher for the the getter(the current categorie selected
