@@ -46,7 +46,7 @@ export const home = {
     events: [],
     categorie: "music",
     page: 1,
-    changePage: false
+    changePage: true
   }),
   getters: {
     loading(state: StateEntity): boolean {
