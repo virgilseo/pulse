@@ -88,8 +88,11 @@ export const home = {
       state.page--;
     },
     signalPageChange(state: StateEntity) {
-      !state.changePage ? (state.changePage = true)    : 
+      !state.changePage ? (state.changePage = true) :
       (state.changePage = false);
+    },
+    resetPageNumber(state: StateEntity) {
+      state.page = 1;
     }
   },
   actions: {
